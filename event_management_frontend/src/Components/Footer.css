@@ -10,7 +10,7 @@
     margin-top: 100px;
 }
 
-.footer-contenrt{
+.footer-content{
     width: 100%;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
