@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import './NavBar.css'
 import { FaBars } from "react-icons/fa";
+import { assets } from '../Assets/assets'
 
 const NavBar = ({userType}) => {
 
@@ -16,7 +17,7 @@ const NavBar = ({userType}) => {
         <div className='container'>
         <nav>
             <div className="logo">
-                <h2>DesignStudio</h2>
+                <img src={assets.logo1} alt=""/>
             </div>
             <ul className={isOpen ? "nav-link active" : "nav-link"}>
                 {userType === 'admin' ? (
