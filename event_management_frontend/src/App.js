@@ -1,13 +1,10 @@
-import Footer from "./Components/Footer";
-import NavBar from "./Components/NavBar";
-import AdminLogin from "./Pages/Admin/LogIn/AdminLogin";
+import Dashboard from "./Pages/Dashboard/Dashboard";
 
 
 function App() {
   return (
     <div className="App">
-      <NavBar userType='admin'/>
-      <Footer/>
+      <Dashboard/>
     </div>
   );
 }
