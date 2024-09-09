@@ -7,7 +7,7 @@ import MyCalendar from '../../Components/Calender'
 
 const Dashboard = () => {
   return (
-    <div>
+    <>
         <NavBar userType="customer"/>
         <Grid container spacing={0}>
             <Grid item xs={4}>
@@ -50,7 +50,7 @@ const Dashboard = () => {
             </Grid>
         </Grid>
 
-    </div>
+    </>
   )
 }
 
