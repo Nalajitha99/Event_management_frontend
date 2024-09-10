@@ -4,6 +4,7 @@ import GoogleMap from '../../Components/GoogleMap'
 import { Button, Grid, TextField, Typography } from '@mui/material'
 import { Search } from '@mui/icons-material'
 import MyCalendar from '../../Components/Calender'
+import CardView from '../../Components/CardView'
 
 const Dashboard = () => {
   return (
@@ -48,7 +49,12 @@ const Dashboard = () => {
             <Grid item xs={3} sx={{marginTop:"20px",marginLeft:"100px"}}>
                 <MyCalendar/>
             </Grid>
+
+            <Grid item xs={12}>
+                <CardView/>
+            </Grid>
         </Grid>
+
 
     </>
   )

@@ -1,0 +1,16 @@
+.welcome-page {
+    height: 100vh;
+    background: url('../../Assets/background.jpg.webp') no-repeat center center fixed; 
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .logo {
+    width: 100%; 
+    max-width: 600px; 
+    height: auto;
+    margin-bottom: 20px;
+  }
