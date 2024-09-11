@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Box, Container, Typography } from '@mui/material';
 import logo from '../../Assets/logo12.png'; 
 import './Welcome.css'; 
+import { useNavigate } from 'react-router-dom';
 
 const Welcome = () => {
 
@@ -20,13 +21,23 @@ const Welcome = () => {
         return () => clearInterval(interval); 
       }, [images.length]);
 
+    const navigate = useNavigate();
+
+    const handleSignUpClick = () => {
+        navigate('/signup');
+    };
+
+    const handleLogInClick = () => {
+        navigate('/login');
+    }
+
   return (
       <Box className="welcome-page"
           style={{
               backgroundImage: `url(${images[bgIndex]})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              transition: 'background-image 1s ease-in-out', // Smooth transition
+              transition: 'background-image 1s ease-in-out', 
           }}
       >
           <Container maxWidth="sm" style={{ textAlign: 'center' }}>
@@ -38,11 +49,11 @@ const Welcome = () => {
                   Please sign in or sign up to continue
               </Typography>
 
-              <Button variant="outlined" color="primary" size="large" style={{ marginRight: '10px' }}>
+              <Button variant="outlined" color="primary" size="large" style={{ marginRight: '10px' }} onClick={handleLogInClick}>
                   Sign In
               </Button>
 
-              <Button variant="outlined" color="secondary" size="large">
+              <Button variant="outlined" color="secondary" size="large" onClick={handleSignUpClick}>
                   Sign Up
               </Button>
           </Container>
