@@ -22,9 +22,10 @@
   }
 
   header {
-    background: #fff;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    background: #6a136a;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
     padding: 2rem 0;
+    max-height: 120px;
   }
 
   .container {
@@ -57,7 +58,7 @@
   }
 
   .nav-link a{
-    color: #212a3c;
+    color: #fff;
     font-size: 1.3rem;
     padding: 0.7rem 1rem;
     display: block;
@@ -65,7 +66,7 @@
   }
 
   .nav-link a:hover{
-    background-color: #ecf0f1;
+    background-color: rgba(0,0,0,0.1);
   }
 
   .nav-link button{
@@ -78,7 +79,7 @@
   }
 
   .nav-link button:hover{
-    background-color: #1a1d23;
+    background-color: rgba(0,0,0,0.5);
   }
 
   .barIcon{

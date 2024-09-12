@@ -17,7 +17,7 @@ const NavBar = ({userType}) => {
         <div className='container'>
         <nav>
             <div className="logo">
-                <img src={assets.logo1} alt="" style={{width:"200px",height:"80px"}}/>
+                <img src={assets.logo12} alt="" style={{width:"200px",height:"80px"}}/>
             </div>
             <ul className={isOpen ? "nav-link active" : "nav-link"}>
                 {userType === 'admin' ? (
@@ -41,13 +41,13 @@ const NavBar = ({userType}) => {
             ) : (
               <>
                 <li>
-                    <a href='/home'>Home</a>
+                    <a href='/dashboard'>Home</a>
                 </li>
                 <li>
                     <a href='/about'>About</a>
                 </li>
                 <li>
-                    <a href='/events'>Events</a>
+                    <a href='/viewevents'>Events</a>
                 </li>
                 <li>
                     <a href='/mybookings'>My Bookings</a>

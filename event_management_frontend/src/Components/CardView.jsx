@@ -96,13 +96,13 @@ const CardView = () => {
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                       {result.venue}
                     </Typography>
-                    <Typography variant="h6" sx={{ color: 'blue' }}>
+                    <Typography variant="h6" sx={{ color: '#6a136a' }}>
                       {result.ticket}
                     </Typography>
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button variant="contained" size="medium">
+                  <Button variant="contained" size="medium" sx={{backgroundColor:"#6a136a"}}>
                     Buy Tickets
                   </Button>
                 </CardActions>

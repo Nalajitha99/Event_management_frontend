@@ -137,7 +137,7 @@ const SignUp = () => {
                                       <Button
                                           fullWidth
                                           variant="contained"
-                                          color="primary"
+                                          sx={{backgroundColor:"#6a136a"}}
                                       >
                                           SignUp
                                       </Button>

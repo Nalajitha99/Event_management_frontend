@@ -5,6 +5,7 @@ import { Button, Grid, TextField, Typography } from '@mui/material'
 import { Search } from '@mui/icons-material'
 import MyCalendar from '../../Components/Calender'
 import CardView from '../../Components/CardView'
+import Footer from '../../Components/Footer'
 
 const Dashboard = () => {
   return (
@@ -54,6 +55,7 @@ const Dashboard = () => {
                 <CardView/>
             </Grid>
         </Grid>
+        <Footer/>
 
 
     </>
