@@ -6,8 +6,16 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 import CardView from '../../Components/CardView';
 import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
+import { useNavigate } from 'react-router-dom';
 
 const ViewEvents = () => {
+
+  const navigate = useNavigate();
+
+  const handleAddEvnt = () => {
+    navigate("/addevent")
+  }
+
   return (
     <>
     <NavBar/>
@@ -38,7 +46,7 @@ const ViewEvents = () => {
           </TextField>
         </Grid>
         <Grid item xs={12} sm={4} lg={4} container justifyContent="flex-end">
-          <Button variant="contained" startIcon={<AddIcon />} sx={{backgroundColor:"#6a136a"}}>
+          <Button variant="contained" startIcon={<AddIcon />} sx={{backgroundColor:"#6a136a"}} onClick={handleAddEvnt}>
             Add Event
           </Button>
         </Grid>
