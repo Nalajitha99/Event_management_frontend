@@ -3,6 +3,7 @@ import { Button, Box, Container, Typography } from '@mui/material';
 import logo from '../../Assets/logo12.png'; 
 import './Welcome.css'; 
 import { useNavigate } from 'react-router-dom';
+import Footer from '../../Components/Footer'
 
 const Welcome = () => {
 
@@ -32,6 +33,7 @@ const Welcome = () => {
     }
 
   return (
+    <>
       <Box className="welcome-page"
           style={{
               backgroundImage: `url(${images[bgIndex]})`,
@@ -49,15 +51,40 @@ const Welcome = () => {
                   Please sign in or sign up to continue
               </Typography>
 
-              <Button variant="outlined" color="primary" size="large" style={{ marginRight: '10px' }} onClick={handleLogInClick}>
-                  Sign In
-              </Button>
-
-              <Button variant="outlined" color="secondary" size="large" onClick={handleSignUpClick}>
-                  Sign Up
-              </Button>
+                  <Button
+                      variant="outlined"
+                      sx={{
+                          ml: "10px",
+                          mr: "20px",
+                          borderRadius: 28,
+                          color: "#ffffff",
+                          minWidth: "170px",
+                          backgroundColor: "#000"
+                      }} size="large"
+                      style={{ marginRight: '10px' }}
+                      onClick={handleLogInClick}
+                  >
+                      Log In
+                  </Button>
+                  <Button
+                      variant="outlined"
+                      sx={{
+                          ml: "10px",
+                          mr: "20px",
+                          borderRadius: 28,
+                          color: "#ffffff",
+                          minWidth: "170px",
+                          backgroundColor: "#000"
+                      }} size="large"
+                      style={{ marginRight: '10px' }}
+                      onClick={handleSignUpClick}
+                  >
+                      Sign Up
+                  </Button>
           </Container>
       </Box>
+      <Footer/>
+    </>
   );
 };
 

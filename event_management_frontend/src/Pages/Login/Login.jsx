@@ -1,7 +1,6 @@
-import { Avatar, Box, Button, Checkbox, Container, createTheme, FormControlLabel, Grid, Stack, TextField, ThemeProvider, Typography } from '@mui/material'
+import { Box, Button, Checkbox, Container, createTheme, FormControlLabel, Grid, Stack, TextField, ThemeProvider, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import bgVideo from '../../Assets/background_video.mp4'
-import sideImg from '../../Assets/login_sideImg.jpg'
 import { useNavigate } from 'react-router-dom'
 import { assets } from '../../Assets/assets'
 
@@ -55,7 +54,7 @@ const Login = () => {
                     minHeight: "100%",
                     zIndex: -1,
                     objectFit: "cover",
-                    filter: "brightness(0.5)" // Optional: Darken the video
+                    filter: "brightness(0.5)" 
                 }}
             >
                 <source src={bgVideo} type="video/mp4" />
