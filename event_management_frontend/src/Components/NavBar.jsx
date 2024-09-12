@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import './NavBar.css'
 import { FaBars } from "react-icons/fa";
 import { assets } from '../Assets/assets'
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = ({userType}) => {
 
@@ -9,6 +10,12 @@ const NavBar = ({userType}) => {
 
     const toggleMenu = () => {
         setIsOpen(!isOpen)
+    }
+
+    const navigate = useNavigate();
+
+    const handleSignOut = () => {
+        navigate('/login')
     }
 
 
@@ -53,7 +60,7 @@ const NavBar = ({userType}) => {
                     <a href='/mybookings'>My Bookings</a>
                 </li>
                 <li>
-                    <button href='/login'>Sign Out</button>
+                    <button onClick={handleSignOut}>Sign Out</button>
                 </li>
               </>
             )}
