@@ -34,6 +34,10 @@ const Login = () => {
 
     const navigate = useNavigate()
 
+    const handleLogin = () => {
+        navigate('/dashboard')
+    }
+
   return (
     <>
         <div
@@ -152,14 +156,16 @@ const Login = () => {
                                         type='submit'
                                         fullWidth="true"
                                         size='large'
+                                        color='secondary'
                                         sx={{
                                             ml:"10px",
                                             mr:"20px",
                                             borderRadius:28,
                                             color:"#ffffff",
                                             minWidth:"170px",
-                                            backgroundColor:"purple"
+                                            backgroundColor:"purple",
                                         }}
+                                        onClick={handleLogin}
                                     >
                                         Log In
                                     </Button>

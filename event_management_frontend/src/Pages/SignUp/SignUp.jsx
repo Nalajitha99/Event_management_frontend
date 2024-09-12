@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid, TextField, Button, Typography, MenuItem, Box, createTheme, ThemeProvider } from '@mui/material';
-import sideImg from '../../Assets/background.jpg.webp'
+import sideImg from '../../Assets/login_sideImg.jpg'
 
 const SignUp = () => {
 
@@ -28,7 +28,7 @@ const SignUp = () => {
                       transform: "translate(-50%, -50%)",
                       width: "75%",
                       height: "90%",
-                      bgcolor: "rgba(0, 0, 0, 0.8)",
+                      bgcolor: "rgba(0, 0, 0, 0.3)",
                       border: "none",
                       boxShadow: 24,
                       borderRadius: 10
@@ -137,7 +137,8 @@ const SignUp = () => {
                                       <Button
                                           fullWidth
                                           variant="contained"
-                                          sx={{backgroundColor:"#6a136a"}}
+                                          sx={{backgroundColor:"#6a136a", color:"#fff"}}
+                                          color='secondary'
                                       >
                                           SignUp
                                       </Button>

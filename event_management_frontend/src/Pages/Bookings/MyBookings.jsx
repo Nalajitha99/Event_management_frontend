@@ -23,26 +23,26 @@ const MyBookings = () => {
       <Table>
         <TableHead>
           <TableRow>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>Event</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>Location</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>Date</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>Venue Type</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>Time</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}>No of Tickets</TableCell>
-            <TableCell sx={{ border: `2px solid ${borderColor}` }}></TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Event</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Location</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Date</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Venue Type</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Time</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>No of Tickets</TableCell>
+            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {bookings.length > 0 ? (
             bookings.map((booking, index) => (
               <TableRow key={index}>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.event}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.location}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.date}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.venueType}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.time}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}>{booking.tickets}</TableCell>
-                <TableCell sx={{ border: `1px solid ${borderColor}` }}><Button variant='contained' sx={{backgroundColor:"#6a136a"}}>View more</Button></TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.event}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.location}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.date}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.venueType}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.time}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.tickets}</TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}><Button variant='contained' sx={{backgroundColor:"#6a136a"}}>View more</Button></TableCell>
               </TableRow>
             ))
           ) : (
