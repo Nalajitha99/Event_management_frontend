@@ -5,8 +5,9 @@ import Login from "./Pages/Login/Login";
 import SignUp from "./Pages/SignUp/SignUp";
 import ViewEvents from "./Pages/Events/ViewEvents";
 import MyBookings from "./Pages/Bookings/MyBookings";
-import Event from "./Pages/Events/Event";
+import EventList from "./Pages/Events/EventList";
 import AddEvent from "./Pages/Events/AddEvent";
+import ViewEvent from "./Pages/Events/ViewEvent";
 
 
 function App() {
@@ -20,8 +21,9 @@ function App() {
           <Route path="/dashboard" exact element={<Dashboard/>}></Route>
           <Route path="/viewevents" exact element={<ViewEvents/>}></Route>
           <Route path="/mybookings" exact element={<MyBookings/>}></Route>
-          <Route path="/viewevent" exact element={<Event/>}></Route>
+          <Route path="/vieweventList" exact element={<EventList/>}></Route>
           <Route path="/addevent" exact element={<AddEvent/>}></Route>
+          <Route path="/viewevent" exact element={<ViewEvent/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
