@@ -4,20 +4,16 @@ import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
 
 const ViewEvent = () => {
-  // State to manage whether the fields are editable
   const [isEditable, setIsEditable] = useState(false);
 
-  // Function to toggle edit mode
   const handleEdit = () => {
     setIsEditable(!isEditable);
   };
 
-  // Function to handle saving the changes
   const handleSave = () => {
-    // Implement your save logic here, like sending the data to the server
+
     console.log("Data saved");
 
-    // After saving, turn off edit mode
     setIsEditable(false);
   };
 
@@ -51,7 +47,7 @@ const ViewEvent = () => {
 
             <Grid item xs={12} style={{ textAlign: 'center' }}>
               <img
-                src="https://via.placeholder.com/150" // Replace this with your image URL
+                src="https://via.placeholder.com/150" //replace this
                 alt="Event"
                 style={{ width: '30%', height: '100%', objectFit: 'cover' }}
               />
@@ -64,7 +60,7 @@ const ViewEvent = () => {
                 variant="filled" 
                 multiline 
                 rows={5} 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -73,7 +69,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="Start Time" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable}
               />
             </Grid>
 
@@ -82,7 +78,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="End Time" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -91,7 +87,7 @@ const ViewEvent = () => {
                 <InputLabel>Event Category</InputLabel>
                 <Select
                   variant='filled'
-                  disabled={!isEditable} // Disable when not in edit mode
+                  disabled={!isEditable} 
                 >
                   <MenuItem value="Entertainment">Entertainment</MenuItem>
                   <MenuItem value="Educational">Educational</MenuItem>
@@ -105,7 +101,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="Ticket Price" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -114,7 +110,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="Venue" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -123,7 +119,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="No of Tickets" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -132,7 +128,7 @@ const ViewEvent = () => {
                 <InputLabel>Venue Type</InputLabel>
                 <Select
                   variant='filled'
-                  disabled={!isEditable} // Disable when not in edit mode
+                  disabled={!isEditable}
                 >
                   <MenuItem value="indoor">Indoor</MenuItem>
                   <MenuItem value="outdoor">Outdoor</MenuItem>
@@ -145,7 +141,7 @@ const ViewEvent = () => {
                 fullWidth 
                 label="Location" 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
@@ -154,7 +150,7 @@ const ViewEvent = () => {
                 <InputLabel>Status</InputLabel>
                 <Select
                   variant='filled'
-                  disabled={!isEditable} // Disable when not in edit mode
+                  disabled={!isEditable} 
                 >
                   <MenuItem value="accepted">Accepted</MenuItem>
                   <MenuItem value="rejected">Rejected</MenuItem>
@@ -169,28 +165,26 @@ const ViewEvent = () => {
                 fullWidth 
                 placeholder='' 
                 variant="filled" 
-                disabled={!isEditable} // Disable when not in edit mode
+                disabled={!isEditable} 
               />
             </Grid>
 
             <Grid item xs={12} style={{ textAlign: 'right' }}>
-              {/* Edit Button: Toggles edit mode */}
               <Button
                 variant="outlined"
                 color="secondary"
                 sx={{ marginRight: '10px', minWidth: "150px" }}
                 onClick={handleEdit}
               >
-                {isEditable ? "Cancel" : "Edit"} {/* Toggle button text */}
+                {isEditable ? "Cancel" : "Edit"} 
               </Button>
 
-              {/* Save Button: Only visible in edit mode */}
               {isEditable && (
                 <Button
                   variant="contained"
                   color="secondary"
                   sx={{ backgroundColor: "#6a136a", color: "#fff", minWidth: "150px" }}
-                  onClick={handleSave} // Handle save action
+                  onClick={handleSave}
                 >
                   Save
                 </Button>
