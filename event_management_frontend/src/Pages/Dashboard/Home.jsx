@@ -7,7 +7,7 @@ import MyCalendar from '../../Components/Calender'
 import CardView from '../../Components/CardView'
 import Footer from '../../Components/Footer'
 
-const Dashboard = () => {
+const Home = () => {
   return (
     <>
         <NavBar userType="customer"/>
@@ -62,4 +62,4 @@ const Dashboard = () => {
   )
 }
 
-export default Dashboard
+export default Home

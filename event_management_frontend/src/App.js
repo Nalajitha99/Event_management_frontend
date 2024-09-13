@@ -1,4 +1,3 @@
-import Dashboard from "./Pages/Dashboard/Dashboard";
 import Welcome from "./Pages/Welcome/Welcome";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./Pages/Login/Login";
@@ -8,6 +7,7 @@ import MyBookings from "./Pages/Bookings/MyBookings";
 import EventList from "./Pages/Events/EventList";
 import AddEvent from "./Pages/Events/AddEvent";
 import ViewEvent from "./Pages/Events/ViewEvent";
+import Home from "./Pages/Dashboard/Home";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/" exact element={<Welcome/>}></Route>
           <Route path="/login" exact element={<Login/>}></Route>
           <Route path="/signup" exact element={<SignUp/>}></Route>
-          <Route path="/dashboard" exact element={<Dashboard/>}></Route>
+          <Route path="/home" exact element={<Home/>}></Route>
           <Route path="/viewevents" exact element={<ViewEvents/>}></Route>
           <Route path="/mybookings" exact element={<MyBookings/>}></Route>
           <Route path="/vieweventList" exact element={<EventList/>}></Route>
