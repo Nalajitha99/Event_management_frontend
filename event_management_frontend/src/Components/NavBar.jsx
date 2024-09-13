@@ -36,7 +36,7 @@ const NavBar = ({userType}) => {
                     <a href='/addevent'>Add Event</a>
                 </li>
                 <li>
-                    <a href='/viewevents'>View Events</a>
+                    <a href='/vieweventTable'>View Events</a>
                 </li>
                 <li>
                     <a href='/viewcustomers'>View Customers</a>
