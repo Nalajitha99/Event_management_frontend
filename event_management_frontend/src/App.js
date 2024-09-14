@@ -9,6 +9,7 @@ import AddEvent from "./Pages/Events/AddEvent";
 import ViewEvent from "./Pages/Events/ViewEvent";
 import Home from "./Pages/Dashboard/Home";
 import EventDetails from "./Pages/Events/EventDetails";
+import Booking from "./Pages/Bookings/Booking";
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
           <Route path="/addevent" exact element={<AddEvent/>}></Route>
           <Route path="/viewevent" exact element={<ViewEvent/>}></Route>
           <Route path="/eventDetails" exact element={<EventDetails/>}></Route>
+          <Route path="/booking" exact element={<Booking/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

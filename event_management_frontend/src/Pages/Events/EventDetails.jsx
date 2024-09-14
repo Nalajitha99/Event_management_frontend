@@ -29,12 +29,10 @@ const EventDetails = () => {
         justifyContent: 'center',
       }}
     >
-      {/* Event Title */}
       <Typography variant="h4" gutterBottom>
         {event.title}
       </Typography>
 
-      {/* Image */}
       <Box
         component="img"
         src={event.image}
@@ -48,7 +46,6 @@ const EventDetails = () => {
         }}
       />
 
-      {/* Event Details */}
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <Typography variant="body1" fontWeight="bold">
