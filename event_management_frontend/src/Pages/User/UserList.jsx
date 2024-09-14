@@ -16,7 +16,7 @@ const UserList = () => {
 
   return (
     <>
-    <NavBar/>
+    <NavBar userType={'admin'}/>
     <Grid container xs={12} sx={{ maxWidth:'100%'}}>
     <TableContainer component={Paper} style={{ marginTop: '50px', marginBottom:'20px' }}>
       <Typography variant="h5" style={{ padding: '16px' }}>

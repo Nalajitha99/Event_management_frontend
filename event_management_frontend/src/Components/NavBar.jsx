@@ -48,7 +48,7 @@ const NavBar = ({userType}) => {
             ) : (
               <>
                 <li>
-                    <a href='/dashboard'>Home</a>
+                    <a href='/home'>Home</a>
                 </li>
                 <li>
                     <a href='/about'>About</a>

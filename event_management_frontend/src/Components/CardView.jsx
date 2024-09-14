@@ -102,7 +102,7 @@ const CardView = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button variant="contained" size="medium" sx={{backgroundColor:"#6a136a"}}>
+                  <Button variant="contained" color='secondary' size="medium" sx={{backgroundColor:"#6a136a"}}>
                     Buy Tickets
                   </Button>
                 </CardActions>

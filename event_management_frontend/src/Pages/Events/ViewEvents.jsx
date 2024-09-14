@@ -45,7 +45,7 @@ const ViewEvents = () => {
           </TextField>
         </Grid>
         <Grid item xs={12} sm={4} lg={4} container justifyContent="flex-end">
-          <Button variant="contained" startIcon={<AddIcon />} sx={{backgroundColor:"#6a136a"}} onClick={handleAddEvnt}>
+          <Button variant="contained" color='secondary' startIcon={<AddIcon />} sx={{backgroundColor:"#6a136a"}} onClick={handleAddEvnt}>
             Add Event
           </Button>
         </Grid>
