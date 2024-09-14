@@ -10,6 +10,7 @@ import ViewEvent from "./Pages/Events/ViewEvent";
 import Home from "./Pages/Dashboard/Home";
 import EventDetails from "./Pages/Events/EventDetails";
 import Booking from "./Pages/Bookings/Booking";
+import Payment from "./Pages/Bookings/Payment";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
           <Route path="/viewevent" exact element={<ViewEvent/>}></Route>
           <Route path="/eventDetails" exact element={<EventDetails/>}></Route>
           <Route path="/booking" exact element={<Booking/>}></Route>
+          <Route path="/payment" exact element={<Payment/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

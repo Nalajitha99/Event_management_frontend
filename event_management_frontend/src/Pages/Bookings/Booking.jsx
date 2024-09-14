@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Box, Typography, Button, TextField } from '@mui/material';
 import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
+import { useNavigate } from 'react-router-dom';
 
 const Booking = () => {
   // Replace these values with actual event data
@@ -15,6 +16,12 @@ const Booking = () => {
     ticketPrice: '$100',
     image: 'https://via.placeholder.com/600x300', // Placeholder image
   };
+
+  const navigate = useNavigate();
+
+  const handleBuyNow = () => {
+    navigate('/payment')
+  }
 
   return (
     <>
@@ -134,6 +141,7 @@ const Booking = () => {
         <Button
           variant="contained"
           color="secondary"
+        onClick={handleBuyNow}
           sx={{
             paddingX: '20px',
             backgroundColor:'#6a136a'
