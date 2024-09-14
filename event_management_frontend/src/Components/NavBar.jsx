@@ -39,7 +39,7 @@ const NavBar = ({userType}) => {
                     <a href='/vieweventList'>View Events</a>
                 </li>
                 <li>
-                    <a href='/viewcustomers'>View Customers</a>
+                    <a href='/userList'>View Customers</a>
                 </li>
                 <li>
                     <a href='/vieweventrequests'>View Event Requests</a>

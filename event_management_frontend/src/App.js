@@ -11,6 +11,7 @@ import Home from "./Pages/Dashboard/Home";
 import EventDetails from "./Pages/Events/EventDetails";
 import Booking from "./Pages/Bookings/Booking";
 import Payment from "./Pages/Bookings/Payment";
+import UserList from "./Pages/User/UserList";
 
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
           <Route path="/eventDetails" exact element={<EventDetails/>}></Route>
           <Route path="/booking" exact element={<Booking/>}></Route>
           <Route path="/payment" exact element={<Payment/>}></Route>
+          <Route path="/userList" exact element={<UserList/>}></Route>
         </Routes>
       </BrowserRouter>
     </>
