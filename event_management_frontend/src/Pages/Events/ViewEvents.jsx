@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Grid, TextField, Button, Card, CardContent, IconButton, MenuItem } from '@mui/material';
+import { Container, Grid, TextField, Button, MenuItem } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
@@ -20,7 +20,6 @@ const ViewEvents = () => {
     <>
     <NavBar/>
     <Container maxWidth="lg" style={{ marginTop: '50px', marginBottom: '20px' }}>
-      {/* Search and Action Buttons */}
       <Grid container spacing={2} alignItems="center" justifyContent="space-between">
         <Grid item xs={12} sm={4} lg={4}>
           <TextField
@@ -66,7 +65,6 @@ const ViewEvents = () => {
         <CardView/>
       </Grid>
 
-      {/* View More Button */}
       <Grid container justifyContent="center" style={{ marginTop: '20px' }}>
         <Button variant="contained" startIcon={<ArrowDropDownIcon />} sx={{backgroundColor:"#6a136a"}}>
           View More
