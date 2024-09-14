@@ -8,6 +8,7 @@ import EventList from "./Pages/Events/EventList";
 import AddEvent from "./Pages/Events/AddEvent";
 import ViewEvent from "./Pages/Events/ViewEvent";
 import Home from "./Pages/Dashboard/Home";
+import EventDetails from "./Pages/Events/EventDetails";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/vieweventList" exact element={<EventList/>}></Route>
           <Route path="/addevent" exact element={<AddEvent/>}></Route>
           <Route path="/viewevent" exact element={<ViewEvent/>}></Route>
+          <Route path="/eventDetails" exact element={<EventDetails/>}></Route>
         </Routes>
       </BrowserRouter>
     </>

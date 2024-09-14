@@ -29,7 +29,7 @@ const MyBookings = () => {
             <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Venue Type</TableCell>
             <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>Time</TableCell>
             <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}>No of Tickets</TableCell>
-            <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}></TableCell>
+            {/* <TableCell align="center" sx={{ border: `2px solid ${borderColor}` }}></TableCell> */}
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,7 +42,7 @@ const MyBookings = () => {
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.venueType}</TableCell>
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.time}</TableCell>
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{booking.tickets}</TableCell>
-                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}><Button variant='contained' sx={{backgroundColor:"#6a136a"}}>View more</Button></TableCell>
+                {/* <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}><Button variant='contained' sx={{backgroundColor:"#6a136a"}}>View more</Button></TableCell> */}
               </TableRow>
             ))
           ) : (
