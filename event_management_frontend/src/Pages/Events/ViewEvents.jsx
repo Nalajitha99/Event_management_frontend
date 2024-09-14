@@ -51,7 +51,6 @@ const ViewEvents = () => {
         </Grid>
       </Grid>
 
-      {/* Card Grid */}
       <Grid container spacing={3} style={{ marginTop: '30px' }}>
         {/* {[...Array(6)].map((_, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
