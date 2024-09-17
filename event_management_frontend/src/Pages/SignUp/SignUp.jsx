@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, Typography, MenuItem, Box, createTheme, ThemeProvider } from '@mui/material';
 import sideImg from '../../Assets/login_sideImg.jpg'
+import axios from "axios"
 
 const SignUp = () => {
 
@@ -9,6 +10,35 @@ const SignUp = () => {
             mode: "dark",
         },
     })
+
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        gender: '',
+        password: '',
+        nicNo: '',
+        email: '',
+        contactNo: '',
+        address: '',
+        username:''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/user/saveUser', formData);
+            console.log(response.data); // Success message
+        } catch (error) {
+            console.error('Error during signup:', error);
+        }
+    };
 
   return (
       <>
@@ -39,14 +69,17 @@ const SignUp = () => {
                           <Typography variant="h4" align="center" gutterBottom>
                               User SignUp
                           </Typography>
-                          <form>
+                          <form onSubmit={handleSubmit}>
                               <Grid container spacing={3}>
                                   <Grid item xs={12} sm={6}>
                                       <TextField
                                           required
                                           fullWidth
                                           label="First Name"
+                                          name='firstName'
                                           variant="outlined"
+                                          value={formData.firstName}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
@@ -55,7 +88,10 @@ const SignUp = () => {
                                           required
                                           fullWidth
                                           label="Last Name"
+                                          name='lastName'
                                           variant="outlined"
+                                          value={formData.lastName}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
@@ -65,8 +101,10 @@ const SignUp = () => {
                                           fullWidth
                                           select
                                           label="Gender"
+                                          name='gender'
                                           variant="outlined"
-                                          defaultValue=""
+                                          value={formData.gender}
+                                          onChange={handleChange}
                                       >
                                           <MenuItem value="Male">Male</MenuItem>
                                           <MenuItem value="Female">Female</MenuItem>
@@ -78,18 +116,36 @@ const SignUp = () => {
                                       <TextField
                                           required
                                           fullWidth
-                                          type="password"
-                                          label="Password"
+                                          label="NIC No"
+                                          name='nicNo'
                                           variant="outlined"
+                                          value={formData.nicNo}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
-                                  <Grid item xs={12}>
+                                  <Grid item xs={12} sm={6}>
                                       <TextField
                                           required
                                           fullWidth
-                                          label="NIC No"
+                                          label="Username"
+                                          name='username'
                                           variant="outlined"
+                                          value={formData.username}
+                                          onChange={handleChange}
+                                      />
+                                  </Grid>
+
+                                  <Grid item xs={12} sm={6}>
+                                      <TextField
+                                          required
+                                          fullWidth
+                                          type="password"
+                                          name='password'
+                                          label="Password"
+                                          variant="outlined"
+                                          value={formData.password}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
@@ -98,8 +154,11 @@ const SignUp = () => {
                                           required
                                           fullWidth
                                           label="E-mail"
+                                          name='email'
                                           variant="outlined"
                                           type="email"
+                                          value={formData.email}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
@@ -108,18 +167,23 @@ const SignUp = () => {
                                           required
                                           fullWidth
                                           label="Contact No"
+                                          name='contactNo'
                                           variant="outlined"
+                                          value={formData.contactNo}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
                                   <Grid item xs={12}>
                                       <TextField
-                                          required
                                           fullWidth
                                           multiline
                                           rows={4}
                                           label="Address"
+                                          name='address'
                                           variant="outlined"
+                                          value={formData.address}
+                                          onChange={handleChange}
                                       />
                                   </Grid>
 
@@ -128,6 +192,7 @@ const SignUp = () => {
                                           fullWidth
                                           variant="outlined"
                                           color="secondary"
+                                          type="reset"
                                       >
                                           Clear
                                       </Button>
@@ -139,6 +204,7 @@ const SignUp = () => {
                                           variant="contained"
                                           sx={{backgroundColor:"#6a136a", color:"#fff"}}
                                           color='secondary'
+                                          type='submit'
                                       >
                                           SignUp
                                       </Button>
