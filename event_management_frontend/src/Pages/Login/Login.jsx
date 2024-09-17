@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import bgVideo from '../../Assets/background_video.mp4'
 import { useNavigate } from 'react-router-dom'
 import { assets } from '../../Assets/assets'
+import axios from 'axios';
 
 const Login = () => {
 
@@ -31,11 +32,27 @@ const Login = () => {
     })
 
     const [remember, setRemember] = useState(false)
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
     const navigate = useNavigate()
 
-    const handleLogin = () => {
-        navigate('/dashboard')
+    const handleLogin = async () => {
+        try {
+            const response = await axios.post('http://localhost:8080/authentication', {
+                username: username,
+                password: password
+            });
+            
+            // Store JWT token in localStorage (or cookies if needed)
+            localStorage.setItem('token', response.data.token);
+
+            // Navigate to the dashboard after successful login
+            navigate('/dashboard');
+        } catch (error) {
+            console.error('Login failed', error);
+            alert('Login failed. Please check your credentials.');
+        }
     }
 
   return (
@@ -88,7 +105,7 @@ const Login = () => {
                                     minHeight: "100%",
                                     zIndex: -1,
                                     objectFit: "cover",
-                                    filter: "brightness(0.5)" // Optional: Darken the video slightly
+                                    filter: "brightness(0.5)" 
                                 }}
                             >
                                 <source src={bgVideo} type="video/mp4" />
@@ -120,11 +137,13 @@ const Login = () => {
                                         variant='filled'
                                         required
                                         fullWidth
-                                        id='email'
-                                        name='email'
+                                        id='username'
+                                        name='username'
                                         label='Username'
-                                        autoComplete='email'
-                                        placeholder='Enter your email'
+                                        autoComplete='username'
+                                        placeholder='Enter your Username'
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sx={{ ml: "3em", mr: "3em", mb:"1em" }}>
@@ -138,6 +157,8 @@ const Login = () => {
                                         label='Password'
                                         autoComplete='new-password'
                                         placeholder='Enter your Password'
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </Grid>
                                 <Grid item xs={12} sx={{ ml:"3em", mr:"3em", mb:"1em" }}>

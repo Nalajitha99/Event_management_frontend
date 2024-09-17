@@ -13,7 +13,6 @@ import Booking from "./Pages/Bookings/Booking";
 import Payment from "./Pages/Bookings/Payment";
 import UserList from "./Pages/User/UserList";
 
-
 function App() {
   return (
     <>

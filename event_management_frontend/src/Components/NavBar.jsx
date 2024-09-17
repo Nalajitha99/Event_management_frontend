@@ -14,9 +14,11 @@ const NavBar = ({userType}) => {
 
     const navigate = useNavigate();
 
-    const handleSignOut = () => {
-        navigate('/login')
-    }
+    const handleLogout = () => {
+        localStorage.removeItem('token');  
+        window.location.href = '/login'; 
+    };
+    
 
 
   return (
@@ -60,7 +62,7 @@ const NavBar = ({userType}) => {
                     <a href='/mybookings'>My Bookings</a>
                 </li>
                 <li>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                    <button onClick={handleLogout}>Sign Out</button>
                 </li>
               </>
             )}
