@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, Typography, MenuItem, Box, createTheme, ThemeProvider } from '@mui/material';
 import sideImg from '../../Assets/login_sideImg.jpg'
 import axios from "axios"
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
 
     const darkTheme = createTheme({
         palette: {
@@ -16,11 +19,12 @@ const SignUp = () => {
         lastName: '',
         gender: '',
         password: '',
-        nicNo: '',
+        nic: '',
         email: '',
         contactNo: '',
         address: '',
-        username:''
+        username:'',
+        role: 'User'
     });
 
     const handleChange = (e) => {
@@ -30,11 +34,42 @@ const SignUp = () => {
         });
     };
 
+    const handleClear = () => {
+        setFormData({
+            firstName: '',
+            lastName: '',
+            gender: '',
+            password: '',
+            nic: '',
+            email: '',
+            contactNo: '',
+            address: '',
+            username: '',
+            role: 'User'
+        });
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:8080/api/v1/user/saveUser', formData);
-            console.log(response.data); // Success message
+            console.log(response.data); 
+
+            setFormData({
+                firstName: '',
+                lastName: '',
+                gender: '',
+                password: '',
+                nic: '',
+                email: '',
+                contactNo: '',
+                address: '',
+                username: '',
+                role: 'User'
+            });
+
+            navigate('/login')
+
         } catch (error) {
             console.error('Error during signup:', error);
         }
@@ -117,9 +152,9 @@ const SignUp = () => {
                                           required
                                           fullWidth
                                           label="NIC No"
-                                          name='nicNo'
+                                          name='nic'
                                           variant="outlined"
-                                          value={formData.nicNo}
+                                          value={formData.nic}
                                           onChange={handleChange}
                                       />
                                   </Grid>
@@ -193,6 +228,7 @@ const SignUp = () => {
                                           variant="outlined"
                                           color="secondary"
                                           type="reset"
+                                          onClick={handleClear}
                                       >
                                           Clear
                                       </Button>

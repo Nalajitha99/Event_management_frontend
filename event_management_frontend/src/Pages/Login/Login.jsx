@@ -44,13 +44,9 @@ const Login = () => {
                 password: password
             });
             
-            // Check if the response contains the JWT token
             const token = response.data.token;
             if (token) {
-                // Store the JWT token in localStorage
                 localStorage.setItem('token', token);
-                
-                // Navigate to the dashboard after successful login
                 navigate('/home');
             } else {
                 alert('Authentication failed. Token not received.');
