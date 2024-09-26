@@ -39,21 +39,28 @@ const Login = () => {
 
     const handleLogin = async () => {
         try {
-            const response = await axios.post('http://localhost:8080/authentication', {
+            const response = await axios.post('http://localhost:8080/authenticate', {
                 username: username,
                 password: password
             });
             
-            // Store JWT token in localStorage (or cookies if needed)
-            localStorage.setItem('token', response.data.token);
-
-            // Navigate to the dashboard after successful login
-            navigate('/dashboard');
+            // Check if the response contains the JWT token
+            const token = response.data.token;
+            if (token) {
+                // Store the JWT token in localStorage
+                localStorage.setItem('token', token);
+                
+                // Navigate to the dashboard after successful login
+                navigate('/home');
+            } else {
+                alert('Authentication failed. Token not received.');
+            }
         } catch (error) {
             console.error('Login failed', error);
             alert('Login failed. Please check your credentials.');
         }
-    }
+    };
+    
 
   return (
     <>
