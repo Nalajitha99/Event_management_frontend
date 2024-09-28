@@ -1,113 +1,237 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, TextField, Select, MenuItem, Button, InputLabel, FormControl, Box } from '@mui/material';
 import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
+import axios from 'axios';
 
 const AddEvent = () => {
+  // State to manage form inputs
+  const [formData, setFormData] = useState({
+    title: '',
+    description: '',
+    category: '',
+    venue: '',
+    venueType: '',
+    ticketPrice: '',
+    noOfTickets: '',
+    location: '',
+    date: '',
+    startTime: '',
+    endTime: '',
+    image: null // for file upload
+  });
+
+  // Function to handle form field changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle image file upload
+  const handleFileChange = (e) => {
+    setFormData({
+      ...formData,
+      image: e.target.files[0],
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const submitData = new FormData();
+
+    // Append form fields to submitData
+    for (const key in formData) {
+      submitData.append(key, formData[key]);
+    }
+
+    // Make the API call to your backend
+    try {
+      const response = await axios.post('http://localhost:8080/api/v1/event/saveEvent', submitData, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+        withCredentials: true
+      });
+      console.log('Event created successfully:', response.data);
+    } catch (error) {
+      console.error('Error creating event:', error);
+    }
+  };
+
   return (
     <>
-    <div>
-    <NavBar userType={'admin'}/>
-    </div>
-    <Box
+      <div>
+        <NavBar userType={'admin'} />
+      </div>
+      <Box
         sx={{
-            position:"relative",
-            top: "63%",
-            left: "50%",
-            transform: "translate(-50%, 0%)",
-            width: "75%",
-            height: "87%",
-            bgcolor: "rgba(255, 255, 255)",
-            border: "none",
-            boxShadow: 24,
-            padding:3,
-            marginTop:2,
-            marginBottom:2
+          position: "relative",
+          top: "63%",
+          left: "50%",
+          transform: "translate(-50%, 0%)",
+          width: "75%",
+          height: "87%",
+          bgcolor: "rgba(255, 255, 255)",
+          border: "none",
+          boxShadow: 24,
+          padding: 3,
+          marginTop: 2,
+          marginBottom: 2
         }}
-    >
-    <form style={{ padding: '10px' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <TextField fullWidth label="Event Title" variant="filled" />
-        </Grid>
+      >
+        <form onSubmit={handleSubmit} style={{ padding: '10px' }}>
+          <Grid container spacing={2}>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Event Title"
+                variant="filled"
+                name="title"
+                value={formData.title}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="Start Time" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Start Time"
+                variant="filled"
+                name="startTime"
+                value={formData.startTime}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="Event Description" variant="filled" multiline rows={4} />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Event Description"
+                variant="filled"
+                multiline
+                rows={4}
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="End Time" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="End Time"
+                variant="filled"
+                name="endTime"
+                value={formData.endTime}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Event Category</InputLabel>
-            <Select variant='filled'>
-              <MenuItem value="Entertainment">Entertainment</MenuItem>
-              <MenuItem value="Educational">Educational</MenuItem>
-              <MenuItem value="Health">Health</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth>
+                <InputLabel>Event Category</InputLabel>
+                <Select
+                  variant='filled'
+                  name="category"
+                  value={formData.category}
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value="Entertainment">Entertainment</MenuItem>
+                  <MenuItem value="Educational">Educational</MenuItem>
+                  <MenuItem value="Health">Health</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="Ticket Price" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Ticket Price"
+                variant="filled"
+                name="ticketPrice"
+                value={formData.ticketPrice}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="Venue" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Venue"
+                variant="filled"
+                name="venue"
+                value={formData.venue}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="No of Tickets" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="No of Tickets"
+                variant="filled"
+                name="noOfTickets"
+                value={formData.noOfTickets}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Venue Type</InputLabel>
-            <Select variant='filled'>
-              <MenuItem value="indoor">Indoor</MenuItem>
-              <MenuItem value="outdoor">Outdoor</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+            <Grid item xs={6}>
+              <FormControl fullWidth>
+                <InputLabel>Venue Type</InputLabel>
+                <Select
+                  variant='filled'
+                  name="venueType"
+                  value={formData.venueType}
+                  onChange={handleInputChange}
+                >
+                  <MenuItem value="indoor">Indoor</MenuItem>
+                  <MenuItem value="outdoor">Outdoor</MenuItem>
+                </Select>
+              </FormControl>
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label='Image' type='file' />
-          <Button variant="contained" color='secondary' style={{ marginTop: '8px' }} sx={{backgroundColor:"#6a136a", color:"#fff",minWidth:"150px"}}>Upload</Button>
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label='Image'
+                type='file'
+                onChange={handleFileChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField fullWidth label="Location" variant="filled" />
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                fullWidth
+                label="Location"
+                variant="filled"
+                name="location"
+                value={formData.location}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <FormControl fullWidth>
-            <InputLabel>Status</InputLabel>
-            <Select variant='filled'>
-              <MenuItem value="accepted">Accepted</MenuItem>
-              <MenuItem value="rejected">Rejected</MenuItem>
-              <MenuItem value="pending">Pending</MenuItem>
-            </Select>
-          </FormControl>
-        </Grid>
+            <Grid item xs={6}>
+              <TextField
+                type='date'
+                fullWidth
+                variant="filled"
+                name="date"
+                value={formData.date}
+                onChange={handleInputChange}
+              />
+            </Grid>
 
-        <Grid item xs={6}>
-          <TextField type='date' fullWidth placeholder='' variant="filled" />
-        </Grid>
-
-        <Grid item xs={12} style={{ textAlign: 'right' }}>
-          <Button variant="outlined" color='secondary' sx={{ marginRight: '10px',minWidth:"150px" }}>Clear</Button>
-          <Button variant="contained" color="secondary" sx={{backgroundColor:"#6a136a", color:"#fff",minWidth:"150px"}}>Save</Button>
-        </Grid>
-      </Grid>
-    </form>
-    </Box>
-    <Footer/>
+            <Grid item xs={12} style={{ textAlign: 'right' }}>
+              <Button variant="outlined" color='secondary' sx={{ marginRight: '10px', minWidth: "150px" }}>Clear</Button>
+              <Button type="submit" variant="contained" color="secondary" sx={{ backgroundColor: "#6a136a", color: "#fff", minWidth: "150px" }}>Save</Button>
+            </Grid>
+          </Grid>
+        </form>
+      </Box>
+      <Footer />
     </>
   );
 };
