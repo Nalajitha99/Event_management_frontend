@@ -60,10 +60,24 @@
 // export default CardView
 
 import { Container, Typography, Grid, Card, CardContent, CardActions, Button, CardActionArea, CardMedia } from '@mui/material';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Data from '../Assets/Data1.json';
+import axios from 'axios';
 
 const CardView = () => {
+
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    axios.get('http://localhost:8080/api/v1/event/getAllEvents')
+      .then(response => {
+        setEvents(response.data);
+      })
+      .catch(error => {
+        console.error("There was an error fetching the event data!", error);
+      });
+  }, []);
+
   return (
     <>
       <Container maxWidth='lg'>

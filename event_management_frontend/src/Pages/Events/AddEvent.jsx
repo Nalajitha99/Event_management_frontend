@@ -5,6 +5,7 @@ import Footer from '../../Components/Footer';
 import axios from 'axios';
 
 const AddEvent = () => {
+  // State to manage form inputs
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -17,9 +18,27 @@ const AddEvent = () => {
     date: '',
     startTime: '',
     endTime: '',
-    image: null // for file upload
+    imageData: null // for file upload
   });
 
+  const handleClear = () => {
+    setFormData({
+      title: '',
+      description: '',
+      category: '',
+      venue: '',
+      venueType: '',
+      ticketPrice: '',
+      noOfTickets: '',
+      location: '',
+      date: '',
+      startTime: '',
+      endTime: '',
+      imageData: null
+    })
+  }
+
+  // Function to handle form field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -28,33 +47,54 @@ const AddEvent = () => {
     });
   };
 
+  // Handle image file upload
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
-      image: e.target.files[0],
+      imageData: e.target.files[0],
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submitData = new FormData();
 
-    // Append form fields to submitData
-    for (const key in formData) {
-      submitData.append(key, formData[key]);
-    }
+    // Append form data fields
+    Object.keys(formData).forEach((key) => {
+      if (formData[key] !== null) {
+        submitData.append(key, formData[key]);
+      }
+    });
+    const token = localStorage.getItem('token'); 
 
-    const token = localStorage.getItem('token'); // Get token from localStorage
-
+    // Make the API call to your backend
     try {
       const response = await axios.post('http://localhost:8080/api/v1/event/saveEvent', submitData, {
         headers: { 
-          'Content-Type': 'multipart/form-data',
-          'Authorization': `Bearer ${token}` // Attach the token here
+          Authorization: `Bearer ${token}`
         },
         withCredentials: true
       });
+
       console.log('Event created successfully:', response.data);
+
+      setFormData({
+        title: '',
+        description: '',
+        category: '',
+        venue: '',
+        venueType: '',
+        ticketPrice: '',
+        noOfTickets: '',
+        location: '',
+        date: '',
+        startTime: '',
+        endTime: '',
+        imageData: null
+      })
+      
+      alert("Event added Successfully!");
     } catch (error) {
       console.error('Error creating event:', error);
     }
@@ -97,6 +137,7 @@ const AddEvent = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
+                type='time'
                 label="Start Time"
                 variant="filled"
                 name="startTime"
@@ -121,6 +162,7 @@ const AddEvent = () => {
             <Grid item xs={6}>
               <TextField
                 fullWidth
+                type='time'
                 label="End Time"
                 variant="filled"
                 name="endTime"
@@ -198,6 +240,7 @@ const AddEvent = () => {
                 fullWidth
                 label='Image'
                 type='file'
+                name='file'
                 onChange={handleFileChange}
               />
             </Grid>
@@ -225,7 +268,7 @@ const AddEvent = () => {
             </Grid>
 
             <Grid item xs={12} style={{ textAlign: 'right' }}>
-              <Button variant="outlined" color='secondary' sx={{ marginRight: '10px', minWidth: "150px" }}>Clear</Button>
+              <Button variant="outlined" color='secondary' sx={{ marginRight: '10px', minWidth: "150px" }} onClick={handleClear}>Clear</Button>
               <Button type="submit" variant="contained" color="secondary" sx={{ backgroundColor: "#6a136a", color: "#fff", minWidth: "150px" }}>Save</Button>
             </Grid>
           </Grid>
