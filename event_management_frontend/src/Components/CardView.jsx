@@ -5,34 +5,31 @@ import { useNavigate } from 'react-router-dom';
 
 const CardView = () => {
 
-  const [events, setEvents] = useState([]);  // State for storing events fetched from backend
+  const [events, setEvents] = useState([]); 
 
   const navigate = useNavigate();
 
-  // Handle Buy Tickets button click, redirect to event details
   const handleBuyTickets = (eventId) => {
-    navigate(`/eventDetails/${eventId}`);  // Navigate to event details page with eventId
+    navigate(`/eventDetails/${eventId}`); 
   }
 
-  // Fetch events from the backend API with JWT token
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        // Get the JWT token from localStorage (or wherever you've stored it)
         const token = localStorage.getItem('token');
 
         const response = await axios.get('http://localhost:8080/api/v1/event/getAllEvents', {
           headers: {
-            Authorization: `Bearer ${token}`  // Pass the token in Authorization header
+            Authorization: `Bearer ${token}`  
           }
         });
-        setEvents(response.data);  // Set events data in state
+        setEvents(response.data); 
       } catch (error) {
         console.error("There was an error fetching the event data!", error);
       }
     };
 
-    fetchEvents();  // Call the fetchEvents function
+    fetchEvents(); 
   }, []);
 
   return (
@@ -43,20 +40,23 @@ const CardView = () => {
         </Typography>
 
         <Grid container spacing={5} style={{ marginTop: "20px" }}>
-          {events.map((event, index) => (   // Iterate through events fetched from backend
+          {events.map((event, index) => (   
             <Grid item xs={12} sm={4} md={4} key={index}>
               <Card sx={{ maxWidth: 345 }} style={{ padding: "10px", marginBottom: "30px" }}>
                 <CardActionArea>
                   <CardMedia
                     component="img"
                     height="140"
-                    image={`data:image/jpeg;base64,${event.imageData}`}  // Display image from byte array
+                    image={`data:image/jpeg;base64,${event.imageData}`} 
                     alt={event.title}
                     style={{ borderRadius: "5px" }}
                   />
                   <CardContent>
                     <Typography gutterBottom variant="h5" component="div">
                       {event.title}  
+                    </Typography>
+                    <Typography gutterBottom variant="h6" component="div">
+                      {event.category}  
                     </Typography>
                     <Typography variant="body2" sx={{ color: 'text.secondary' }}>
                       {new Date(event.date).toLocaleDateString()} 
@@ -73,7 +73,7 @@ const CardView = () => {
                   </CardContent>
                 </CardActionArea>
                 <CardActions>
-                  <Button variant="contained" color='secondary' size="medium" sx={{backgroundColor:"#6a136a"}} onClick={() => handleBuyTickets(event.id)}>
+                  <Button variant="contained" color='secondary' size="medium" sx={{backgroundColor:"#6a136a"}} onClick={() => handleBuyTickets(event.eventId)}>
                     Buy Tickets
                   </Button>
                 </CardActions>
