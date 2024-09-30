@@ -52,6 +52,8 @@ const Login = () => {
                  // Start a timer to remove the token after token expiration time 1 hour
             setTimeout(() => {
                 localStorage.removeItem('token');
+                alert('Session Expired!... Please Login again. ')
+                navigate('/login');
                
             }, 3600000); // 1 hour
             

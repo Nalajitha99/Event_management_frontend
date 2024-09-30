@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const CardView = () => {
+const CardView = ({event}) => {
 
   const [events, setEvents] = useState([]); 
 
@@ -35,9 +35,9 @@ const CardView = () => {
   return (
     <>
       <Container maxWidth='lg'>
-        <Typography variant='h5' style={{ marginTop: "50px" }}>
+        {/* <Typography variant='h5' style={{ marginTop: "50px" }}>
           Upcoming Events
-        </Typography>
+        </Typography> */}
 
         <Grid container spacing={5} style={{ marginTop: "20px" }}>
           {events.map((event, index) => (   

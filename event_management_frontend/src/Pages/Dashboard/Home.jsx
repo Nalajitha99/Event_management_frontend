@@ -52,6 +52,9 @@ const Home = () => {
                     </Box>
                 </Grid>
                 <Grid item xs={12} sx={{ marginTop: "100px" }}>
+                    <Typography variant='h4' style={{ marginTop: "50px", marginLeft:"250px" }}>
+                        Upcoming Events
+                    </Typography> 
                     <CardView />
                 </Grid>
             </Grid>
