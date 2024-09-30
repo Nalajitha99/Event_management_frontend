@@ -5,7 +5,7 @@ import Footer from '../../Components/Footer';
 import axios from 'axios';
 
 const AddEvent = () => {
-  // State to manage form inputs
+
   const [formData, setFormData] = useState({
     title: '',
     description: '',
@@ -18,7 +18,7 @@ const AddEvent = () => {
     date: '',
     startTime: '',
     endTime: '',
-    imageData: null // for file upload
+    imageData: null 
   });
 
   const handleClear = () => {
@@ -38,7 +38,6 @@ const AddEvent = () => {
     })
   }
 
-  // Function to handle form field changes
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -47,7 +46,6 @@ const AddEvent = () => {
     });
   };
 
-  // Handle image file upload
   const handleFileChange = (e) => {
     setFormData({
       ...formData,
@@ -55,12 +53,10 @@ const AddEvent = () => {
     });
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     const submitData = new FormData();
 
-    // Append form data fields
     Object.keys(formData).forEach((key) => {
       if (formData[key] !== null) {
         submitData.append(key, formData[key]);
@@ -68,7 +64,6 @@ const AddEvent = () => {
     });
     const token = localStorage.getItem('token'); 
 
-    // Make the API call to your backend
     try {
       const response = await axios.post('http://localhost:8080/api/v1/event/saveEvent', submitData, {
         headers: { 
