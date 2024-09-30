@@ -52,7 +52,7 @@ const CardView = ({event}) => {
                     style={{ borderRadius: "5px" }}
                   />
                   <CardContent>
-                    <Typography gutterBottom variant="h5" component="div">
+                    <Typography gutterBottom variant="h5" component="div" sx={{ color: '#6a136a', fontWeight:'bold' }}>
                       {event.title}  
                     </Typography>
                     <Typography gutterBottom variant="h6" component="div">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavBar from '../../Components/NavBar';
 import GoogleMap from '../../Components/GoogleMap';
 import { Button, Grid, TextField, Typography, Box } from '@mui/material';
@@ -6,8 +6,32 @@ import { Search } from '@mui/icons-material';
 import MyCalendar from '../../Components/Calender';
 import CardView from '../../Components/CardView';
 import Footer from '../../Components/Footer';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 const Home = () => {
+    const [searchArea, setSearchArea] = useState('');
+    const [venues, setVenues] = useState([]);
+
+    const { venue } = useParams();
+
+    const handleSearch = async () => {
+        if (!searchArea) return;
+
+        try {
+
+            const token = localStorage.getItem('token');
+            const response = await axios.get(`http://localhost:8080/api/v1/event/venue/${venue}`, {
+                headers: {
+                  Authorization: `Bearer ${token}`  
+                }
+              });
+            setVenues(response.data); // Assuming the API returns an array of venues
+        } catch (error) {
+            console.error('Error fetching venues:', error);
+        }
+    };
+
     return (
         <>
             <NavBar userType="customer" />
@@ -25,6 +49,8 @@ const Home = () => {
                             variant='outlined'
                             size='small'
                             fullWidth
+                            value={searchArea}
+                            onChange={(e) => setSearchArea(e.target.value)} // Update the state on input change
                         />
                     </div>
                 </Grid>
@@ -34,6 +60,7 @@ const Home = () => {
                             sx={{ width: "100%" }}
                             variant='contained'
                             color='success'
+                            onClick={handleSearch} // Trigger search on button click
                         >
                             <Search />
                             Search
@@ -43,7 +70,7 @@ const Home = () => {
                 {/* Adjust Google Map and Calendar layout */}
                 <Grid item xs={12} md={8}>
                     <Box sx={{ height: '400px', width: '100%', marginRight: { md: '16px', xs: '0px' } }}>
-                        <GoogleMap />
+                        <GoogleMap venues={venues} /> {/* Pass venues to the Google Map */}
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={4} sx={{ marginTop: '20px'}}>

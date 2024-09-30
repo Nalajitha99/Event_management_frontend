@@ -8,39 +8,55 @@ const containerStyle = {
   marginTop: "20px"
 };
 
-const center = {
+// Default center point (Colombo, Sri Lanka)
+const defaultCenter = {
     lat: 6.9271,
     lng: 79.8612,
 };
 
-const GoogleMaps = () => {
-
+const GoogleMaps = ({ venues = [] }) => {
     const [userLocation, setUserLocation] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            setUserLocation({ lat: latitude, lng: longitude });
-          },
-          (error) => {
-            console.error("Error getting location", error);
-          }
-        );
-      } else {
-        console.error("Geolocation is not supported by this browser.");
-      }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setUserLocation({ lat: latitude, lng: longitude });
+                    setLoading(false);
+                },
+                (error) => {
+                    console.error("Error getting location", error);
+                    setLoading(false);
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+            setLoading(false);
+        }
     }, []);
 
-  return (
-    <LoadScript googleMapsApiKey="AIzaSyB5Z65P9h9gbY-q_t83oKHmMUmj0aPmigg">
-      <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
-        <Marker position={center} />
-        {userLocation && <Marker position={userLocation} />}
-      </GoogleMap>
-    </LoadScript>
-  );
+    // Determine the map center based on user location
+    const center = userLocation ? userLocation : defaultCenter;
+
+    return (
+        <LoadScript googleMapsApiKey="AIzaSyB5Z65P9h9gbY-q_t83oKHmMUmj0aPmigg">
+            <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+                <Marker position={defaultCenter} title="Default Center" />
+                {userLocation && <Marker position={userLocation} title="Your Location" />}
+                
+                {/* Render markers for each venue */}
+                {venues.map((venue, index) => (
+                    <Marker 
+                        key={index} 
+                        position={{ lat: venue.latitude, lng: venue.longitude }} 
+                        title={venue.name} // Assuming venue has a name property
+                    />
+                ))}
+            </GoogleMap>
+        </LoadScript>
+    );
 };
 
 export default GoogleMaps;
