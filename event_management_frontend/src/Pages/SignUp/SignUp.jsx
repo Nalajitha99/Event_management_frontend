@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Container, Grid, TextField, Button, Typography, MenuItem, Box, createTheme, ThemeProvider } from '@mui/material';
-import sideImg from '../../Assets/login_sideImg.jpg'
 import axios from "axios"
 import { useNavigate } from 'react-router-dom';
+import { assets } from '../../Assets/assets'
 
 const SignUp = () => {
 
@@ -10,7 +10,7 @@ const SignUp = () => {
 
     const darkTheme = createTheme({
         palette: {
-            mode: "dark",
+            mode: "light",
         },
     })
 
@@ -79,12 +79,12 @@ const SignUp = () => {
       <>
           <div
               style={{
-                  backgroundImage: `url(${sideImg})`,
                   backgroundSize: "cover",
                   height: "100vh",
                   color: "#f5f5f5",
               }}
           >
+            <img src={assets.logo11} alt='' style={{width:"300px",height:"140px",marginLeft:"100px",marginBottom:"20px",marginTop:"20px"}}/>
               <Box
                   sx={{
                       position: "absolute",
@@ -93,16 +93,14 @@ const SignUp = () => {
                       transform: "translate(-50%, -50%)",
                       width: "75%",
                       height: "90%",
-                      bgcolor: "rgba(0, 0, 0, 0.3)",
+                      bgcolor: "rgba(0, 0, 0, 0)",
                       border: "none",
-                      boxShadow: 24,
-                      borderRadius: 10
                   }}
               >
                   <ThemeProvider theme={darkTheme}>
-                      <Container maxWidth="md" style={{ marginTop: '50px' }}>
-                          <Typography variant="h4" align="center" gutterBottom>
-                              User SignUp
+                      <Container maxWidth="md" style={{ marginTop: '50px' }}>  
+                          <Typography variant="h3" align="center" gutterBottom sx={{color:"black",fontWeight:"bold",marginBottom:"50px"}}>
+                              SignUp
                           </Typography>
                           <form onSubmit={handleSubmit}>
                               <Grid container spacing={3}>
