@@ -3,6 +3,7 @@ import { Container, Grid, TextField, Button, MenuItem, Typography, CardActionAre
 import SearchIcon from '@mui/icons-material/Search';
 import AddIcon from '@mui/icons-material/Add';
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp';
 import Footer from '../../Components/Footer';
 import NavBar from '../../Components/NavBar';
 import { useNavigate } from 'react-router-dom';
@@ -14,6 +15,7 @@ const ViewEvents = () => {
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
   const [visibleEvents, setVisibleEvents] = useState(6);
+  const [showMore, setShowMore] = useState(false);
 
   const navigate = useNavigate();
 
@@ -62,11 +64,18 @@ const ViewEvents = () => {
 
     setFilteredEvents(filtered);
     setVisibleEvents(6);
+    setShowMore(false);
   };
 
-  const handleViewMore = () => {
-    setVisibleEvents(filteredEvents.length); // Show all events when "View More" is clicked
+  const handleToggleView = () => {
+    if (showMore) {
+      setVisibleEvents(6); // Show only 6 events
+    } else {
+      setVisibleEvents(filteredEvents.length); // Show all events
+    }
+    setShowMore(!showMore); // Toggle between 'Show More' and 'Show Less'
   };
+
 
   const handleBuyTickets = (eventId) => {
     navigate(`/eventDetails/${eventId}`);
@@ -112,8 +121,8 @@ const ViewEvents = () => {
         </Grid>
 
         <Grid container spacing={3} style={{ marginTop: '30px' }}>
-          {filteredEvents.length > 0 ? (
-            filteredEvents.map((event, index) => (
+        {filteredEvents.length > 0 ? (
+        filteredEvents.slice(0, visibleEvents).map((event, index)  => (
               <Grid item xs={12} sm={4} md={4} key={index}>
                 <Card sx={{ maxWidth: 345 }} style={{ padding: "10px", marginBottom: "30px" }}>
                   <CardActionArea>
@@ -158,13 +167,21 @@ const ViewEvents = () => {
             <Typography variant="h6" style={{ marginTop: '20px', marginBottom: '20px' }}>
               No events found.
             </Typography>
-          )}
+          )
+          }
+          
         </Grid>
 
-        {filteredEvents.length > visibleEvents && (
+        {filteredEvents.length > 6 && (
           <Grid container justifyContent="center" style={{ marginTop: '20px' }}>
-            <Button variant="contained" startIcon={<ArrowDropDownIcon />} sx={{ backgroundColor: "#6a136a" }} onClick={handleViewMore}>
-              View More
+            <Button
+              variant="contained"
+              color='secondary'
+              startIcon={showMore ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+              sx={{ backgroundColor: "#6a136a" }}
+              onClick={handleToggleView}
+            >
+              {showMore ? "View Less" : "View More"}
             </Button>
           </Grid>
         )}
