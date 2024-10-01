@@ -13,6 +13,7 @@ const ViewEvents = () => {
   const [category, setCategory] = useState('');
   const [events, setEvents] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
+  const [visibleEvents, setVisibleEvents] = useState(6);
 
   const navigate = useNavigate();
 
@@ -60,6 +61,11 @@ const ViewEvents = () => {
     }
 
     setFilteredEvents(filtered);
+    setVisibleEvents(6);
+  };
+
+  const handleViewMore = () => {
+    setVisibleEvents(filteredEvents.length); // Show all events when "View More" is clicked
   };
 
   const handleBuyTickets = (eventId) => {
@@ -155,11 +161,13 @@ const ViewEvents = () => {
           )}
         </Grid>
 
-        <Grid container justifyContent="center" style={{ marginTop: '20px' }}>
-          <Button variant="contained" startIcon={<ArrowDropDownIcon />} sx={{ backgroundColor: "#6a136a" }}>
-            View More
-          </Button>
-        </Grid>
+        {filteredEvents.length > visibleEvents && (
+          <Grid container justifyContent="center" style={{ marginTop: '20px' }}>
+            <Button variant="contained" startIcon={<ArrowDropDownIcon />} sx={{ backgroundColor: "#6a136a" }} onClick={handleViewMore}>
+              View More
+            </Button>
+          </Grid>
+        )}
       </Container>
       <Footer />
     </>
