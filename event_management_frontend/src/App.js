@@ -37,7 +37,7 @@ function App() {
           <Route path="/mybookings" exact element={<ProtectedRoute><MyBookings/></ProtectedRoute>}></Route>
           <Route path="/vieweventList" exact element={<ProtectedRoute><EventList/></ProtectedRoute>}></Route>
           <Route path="/addevent" exact element={<ProtectedRoute><AddEvent/></ProtectedRoute>}></Route>
-          <Route path="/viewevent" exact element={<ProtectedRoute><ViewEvent/></ProtectedRoute>}></Route>
+          <Route path="/viewevent/:eventId" exact element={<ProtectedRoute><ViewEvent/></ProtectedRoute>}></Route>
           <Route path="/eventDetails/:eventId" exact element={<ProtectedRoute><EventDetails/></ProtectedRoute>}></Route>
           <Route path="/booking" exact element={<ProtectedRoute><Booking/></ProtectedRoute>}></Route>
           <Route path="/payment" exact element={<ProtectedRoute><Payment/></ProtectedRoute>}></Route>
