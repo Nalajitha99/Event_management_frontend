@@ -12,14 +12,22 @@ import EventDetails from "./Pages/Events/EventDetails";
 import Booking from "./Pages/Bookings/Booking";
 import Payment from "./Pages/Bookings/Payment";
 import UserList from "./Pages/User/UserList";
+import Dashboard from "./Pages/Dashboard/Dashboard";
+import EmailVerification from "./Pages/SignUp/EmailVerification";
 
 function App() {
 
-  const ProtectedRoute = ({ children }) => {
+  const ProtectedRoute = ({ children,requiredRole  }) => {
     const token = localStorage.getItem('token');
+    const role = sessionStorage.getItem('role');
     
     if (!token) {
         return <Navigate to="/login" replace />;
+    }
+
+    if (requiredRole && role !== requiredRole) {
+      // If the user doesn't have the required role, redirect them to a different page
+      return <Navigate to={role === 'ADMIN' ? '/dashboard' : '/home'} replace />;
     }
 
     return children;
@@ -32,16 +40,20 @@ function App() {
           <Route path="/" exact element={<Welcome/>}></Route>
           <Route path="/login" exact element={<Login/>}></Route>
           <Route path="/signup" exact element={<SignUp/>}></Route>
-          <Route path="/home" exact element={<ProtectedRoute><Home/></ProtectedRoute>}></Route>
-          <Route path="/viewevents" exact element={<ProtectedRoute><ViewEvents/></ProtectedRoute>}></Route>
-          <Route path="/mybookings" exact element={<ProtectedRoute><MyBookings/></ProtectedRoute>}></Route>
-          <Route path="/vieweventList" exact element={<ProtectedRoute><EventList/></ProtectedRoute>}></Route>
-          <Route path="/addevent" exact element={<ProtectedRoute><AddEvent/></ProtectedRoute>}></Route>
-          <Route path="/viewevent/:eventId" exact element={<ProtectedRoute><ViewEvent/></ProtectedRoute>}></Route>
-          <Route path="/eventDetails/:eventId" exact element={<ProtectedRoute><EventDetails/></ProtectedRoute>}></Route>
-          <Route path="/booking" exact element={<ProtectedRoute><Booking/></ProtectedRoute>}></Route>
-          <Route path="/payment" exact element={<ProtectedRoute><Payment/></ProtectedRoute>}></Route>
-          <Route path="/userList" exact element={<ProtectedRoute><UserList/></ProtectedRoute>}></Route>
+          <Route path="/verify" exact element={<EmailVerification/>}></Route>
+
+          <Route path="/home" exact element={<ProtectedRoute requiredRole="USER"><Home/></ProtectedRoute>}></Route>
+          <Route path="/dashboard" exact element={<ProtectedRoute requiredRole="ADMIN"><Dashboard/></ProtectedRoute>}></Route>
+
+          <Route path="/viewevents" exact element={<ProtectedRoute requiredRole="USER"><ViewEvents/></ProtectedRoute>}></Route>
+          <Route path="/mybookings" exact element={<ProtectedRoute requiredRole="USER"><MyBookings/></ProtectedRoute>}></Route>
+          <Route path="/vieweventList" exact element={<ProtectedRoute requiredRole="ADMIN"><EventList/></ProtectedRoute>}></Route>
+          <Route path="/addevent" exact element={<ProtectedRoute requiredRole="ADMIN"><AddEvent/></ProtectedRoute>}></Route>
+          <Route path="/viewevent/:eventId" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewEvent/></ProtectedRoute>}></Route>
+          <Route path="/eventDetails/:eventId" exact element={<ProtectedRoute requiredRole="USER"><EventDetails/></ProtectedRoute>}></Route>
+          <Route path="/booking" exact element={<ProtectedRoute requiredRole="USER"><Booking/></ProtectedRoute>}></Route>
+          <Route path="/payment" exact element={<ProtectedRoute requiredRole="USER"><Payment/></ProtectedRoute>}></Route>
+          <Route path="/userList" exact element={<ProtectedRoute requiredRole="ADMIN"><UserList/></ProtectedRoute>}></Route>
         </Routes>
       </BrowserRouter>
     </>

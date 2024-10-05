@@ -24,7 +24,7 @@ const SignUp = () => {
         contactNo: '',
         address: '',
         username:'',
-        role: 'User'
+        role: 'USER'
     });
 
     const handleChange = (e) => {
@@ -45,7 +45,7 @@ const SignUp = () => {
             contactNo: '',
             address: '',
             username: '',
-            role: 'User'
+            role: 'USER'
         });
     };
 
@@ -65,13 +65,19 @@ const SignUp = () => {
                 contactNo: '',
                 address: '',
                 username: '',
-                role: 'User'
+                role: 'USER'
             });
 
-            navigate('/login')
+            alert(response.data.message);
+            navigate('/verify')
 
         } catch (error) {
-            console.error('Error during signup:', error);
+            if (error.response && error.response.data) {
+                alert(error.response.data.message);  // Show the error message from the server
+            } else {
+                console.error('Error during signup:', error);
+                alert("Signup failed! Please try again.");
+            }
         }
     };
 

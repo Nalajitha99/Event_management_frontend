@@ -64,7 +64,7 @@ const ViewEvent = () => {
 
   return (
     <>
-      <NavBar userType={'admin'} />
+      <NavBar  />
       <Box sx={{ position: "relative", top: "63%", left: "50%", transform: "translate(-50%, 0%)", width: "75%", height: "87%", bgcolor: "rgba(255, 255, 255)", boxShadow: 24, padding: 3, marginTop: 2, marginBottom: 2 }}>
         <form style={{ padding: '10px' }}>
           <Grid container spacing={2}>

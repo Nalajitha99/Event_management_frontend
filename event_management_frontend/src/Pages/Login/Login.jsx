@@ -45,13 +45,22 @@ const Login = () => {
             });
             
             const token = response.data.token;
+            const role = response.data.role;
             if (token) {
-                localStorage.setItem('token', token);
-                navigate('/home');
+                localStorage.setItem('token', token); // Keeping token in local storage for persistence
+                sessionStorage.setItem('role', role); // Storing role in session storage
+    
+                // Navigate based on the user role
+                if (role === 'ADMIN') {
+                    navigate('/dashboard'); // Admin navigates to dashboard
+                } else if (role === 'USER') {
+                    navigate('/home'); // User navigates to home
+                }
 
                  // Start a timer to remove the token after token expiration time 1 hour
             setTimeout(() => {
                 localStorage.removeItem('token');
+                sessionStorage.removeItem('role');
                 alert('Session Expired!... Please Login again. ')
                 navigate('/login');
                
@@ -61,12 +70,12 @@ const Login = () => {
            
 
             } else {
-                alert('Authentication failed. Token not received.');
+                alert(response.data.message);   
             }
             
         } catch (error) {
             console.error('Login failed', error);
-            alert('Login failed. Please check your credentials.');
+            alert(error);
         }
     };
     

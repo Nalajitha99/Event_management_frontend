@@ -35,7 +35,7 @@ const EventList = () => {
 
   return (
     <>
-      <NavBar userType={'admin'} />
+      <NavBar  />
       <Grid container xs={12} sx={{ padding: '0 20px', justifyContent: 'center' }}>
         <Grid item xs={12} sm={10} md={8} lg={10}>
         <TableContainer style={{ marginTop: '50px', marginBottom: '20px' }}>

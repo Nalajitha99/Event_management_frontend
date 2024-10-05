@@ -34,7 +34,7 @@ const Home = () => {
 
     return (
         <>
-            <NavBar userType="customer" />
+            <NavBar />
             <Grid container spacing={2} sx={{ padding: { xs: '16px', sm: '32px' } }}>
                 <Grid item xs={12} md={4}>
                     <div className='mt-5'>

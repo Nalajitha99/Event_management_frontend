@@ -98,7 +98,7 @@ const AddEvent = () => {
   return (
     <>
       <div>
-        <NavBar userType={'admin'} />
+        <NavBar/>
       </div>
       <Box
         sx={{
