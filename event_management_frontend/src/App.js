@@ -14,6 +14,7 @@ import Payment from "./Pages/Bookings/Payment";
 import UserList from "./Pages/User/UserList";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import EmailVerification from "./Pages/SignUp/EmailVerification";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
           <Route path="/verify" exact element={<EmailVerification/>}></Route>
 
           <Route path="/home" exact element={<ProtectedRoute requiredRole="USER"><Home/></ProtectedRoute>}></Route>
+          <Route path="/aboutUs" exact element={<ProtectedRoute requiredRole="USER"><AboutUs/></ProtectedRoute>}></Route>
           <Route path="/dashboard" exact element={<ProtectedRoute requiredRole="ADMIN"><Dashboard/></ProtectedRoute>}></Route>
 
           <Route path="/viewevents" exact element={<ProtectedRoute requiredRole="USER"><ViewEvents/></ProtectedRoute>}></Route>

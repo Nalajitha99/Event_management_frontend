@@ -56,7 +56,7 @@ const NavBar = () => {
                                     <a href='/home'>Home</a>
                                 </li>
                                 <li>
-                                    <a href='/about'>About</a>
+                                    <a href='/aboutUs'>About</a>
                                 </li>
                                 <li>
                                     <a href='/viewevents'>Events</a>

@@ -96,7 +96,7 @@
     .nav-link{
         flex-direction: column;
         justify-content: space-evenly;
-        background-color: #fff;
+        background-color: #6a136a;
         position: absolute;
         width: 250px;
         height: 60vh;
@@ -104,6 +104,10 @@
         right: 0;
         z-index: 10;
         transition: all 0.8s;
+    }
+
+    .nav-link a{
+      color: black;
     }
 
     .nav-link.active{
