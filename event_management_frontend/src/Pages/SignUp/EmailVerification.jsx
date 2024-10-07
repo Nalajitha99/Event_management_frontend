@@ -1,9 +1,50 @@
 import React, { useState } from 'react';
 import { Container, Box, TextField, Typography, Button, Grid } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const EmailVerification = () => {
-  const [email, setEmail] = useState('');
-  const [otp, setOtp] = useState('');
+  
+  const navigate = useNavigate();
+
+    const [formData, setFormData] = useState({
+        email: '',
+        otp: '',
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/user/verifyEmail', formData);
+            console.log(response.data); 
+
+            setFormData({
+                email: '',
+                otp: '',
+            });
+
+            alert(response.data.message);
+            navigate('/login')
+
+        } catch (error) {
+            if (error.response && error.response.data) {
+                alert(error.response.data.message);  
+            } else {
+                console.error('Error during signup:', error);
+                alert("OTP is Incorrect!");
+            }
+        }
+    };
+
+
+
 
   return (
     <Container maxWidth="sm">
@@ -34,8 +75,8 @@ const EmailVerification = () => {
               required
               label="Email"
               variant="outlined"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              value={formData.email}
+              onChange={handleChange}
               placeholder="Enter your email"
               type="email"
             />
@@ -47,8 +88,8 @@ const EmailVerification = () => {
               required
               label="OTP Code"
               variant="outlined"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
+              value={formData.otp}
+              onChange={handleChange}
               placeholder="Enter the OTP code"
               type="text"
               inputProps={{ maxLength: 6 }} 
@@ -60,7 +101,7 @@ const EmailVerification = () => {
               fullWidth 
               variant="contained" 
               color="primary" 
-              // onClick={handleSubmit} 
+              onClick={handleSubmit} 
               sx={{ padding: "10px 0" }}
             >
               Verify OTP

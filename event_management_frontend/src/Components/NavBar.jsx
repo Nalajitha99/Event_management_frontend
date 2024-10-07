@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 import { FaBars } from "react-icons/fa";
 import { assets } from '../Assets/assets';
-import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -11,8 +10,6 @@ const NavBar = () => {
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     }
-
-    const navigate = useNavigate();
 
     const handleLogout = () => {
         localStorage.removeItem('token');
