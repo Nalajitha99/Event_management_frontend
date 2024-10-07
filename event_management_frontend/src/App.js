@@ -26,7 +26,6 @@ function App() {
     }
 
     if (requiredRole && role !== requiredRole) {
-      // If the user doesn't have the required role, redirect them to a different page
       return <Navigate to={role === 'ADMIN' ? '/dashboard' : '/home'} replace />;
     }
 

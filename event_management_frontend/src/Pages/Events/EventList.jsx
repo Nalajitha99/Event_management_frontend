@@ -9,10 +9,8 @@ const EventList = () => {
   const borderColor = '#6a136a';
   const navigate = useNavigate();
 
-  // State to store events fetched from the backend
   const [events, setEvents] = useState([]);
 
-  // Fetch events from the backend
   useEffect(() => {
     const token = localStorage.getItem('token');
     axios.get('http://localhost:8080/api/v1/event/getAllEvents', {

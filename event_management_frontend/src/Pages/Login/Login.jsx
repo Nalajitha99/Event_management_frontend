@@ -47,26 +47,23 @@ const Login = () => {
             const token = response.data.token;
             const role = response.data.role;
             if (token) {
-                localStorage.setItem('token', token); // Keeping token in local storage for persistence
-                sessionStorage.setItem('role', role); // Storing role in session storage
-    
-                // Navigate based on the user role
+                localStorage.setItem('token', token); 
+                sessionStorage.setItem('role', role); 
+
                 if (role === 'ADMIN') {
-                    navigate('/dashboard'); // Admin navigates to dashboard
+                    navigate('/dashboard'); 
                 } else if (role === 'USER') {
-                    navigate('/home'); // User navigates to home
+                    navigate('/home');
                 }
 
-                 // Start a timer to remove the token after token expiration time 1 hour
             setTimeout(() => {
                 localStorage.removeItem('token');
                 sessionStorage.removeItem('role');
                 alert('Session Expired!... Please Login again. ')
                 navigate('/login');
                
-            }, 3600000); // 1 hour
+            }, 3600000); 
             
-              // Start inactivity timer
            
 
             } else {

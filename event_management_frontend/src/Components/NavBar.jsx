@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [userType, setUserType] = useState(''); // State to store user role
+    const [userType, setUserType] = useState(''); 
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
@@ -20,13 +20,12 @@ const NavBar = () => {
         window.location.href = '/login';
     };
 
-    // Use useEffect to load the role from sessionStorage when the component mounts
     useEffect(() => {
         const role = sessionStorage.getItem('role');
         if (role) {
             setUserType(role);
         }
-    }, []); // Empty dependency array ensures it runs only once on mount
+    }, []); 
 
     return (
         <header>

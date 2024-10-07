@@ -26,7 +26,7 @@ const Home = () => {
                   Authorization: `Bearer ${token}`  
                 }
               });
-            setVenues(response.data); // Assuming the API returns an array of venues
+            setVenues(response.data); 
         } catch (error) {
             console.error('Error fetching venues:', error);
         }
@@ -50,7 +50,7 @@ const Home = () => {
                             size='small'
                             fullWidth
                             value={searchArea}
-                            onChange={(e) => setSearchArea(e.target.value)} // Update the state on input change
+                            onChange={(e) => setSearchArea(e.target.value)} 
                         />
                     </div>
                 </Grid>
@@ -60,17 +60,16 @@ const Home = () => {
                             sx={{ width: "100%" }}
                             variant='contained'
                             color='success'
-                            onClick={handleSearch} // Trigger search on button click
+                            onClick={handleSearch} 
                         >
                             <Search />
                             Search
                         </Button>
                     </div>
                 </Grid>
-                {/* Adjust Google Map and Calendar layout */}
                 <Grid item xs={12} md={8}>
                     <Box sx={{ height: '400px', width: '100%', marginRight: { md: '16px', xs: '0px' } }}>
-                        <GoogleMap venues={venues} /> {/* Pass venues to the Google Map */}
+                        <GoogleMap venues={venues} /> 
                     </Box>
                 </Grid>
                 <Grid item xs={12} md={4} sx={{ marginTop: '20px'}}>

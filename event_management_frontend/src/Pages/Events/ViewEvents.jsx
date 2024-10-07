@@ -69,11 +69,11 @@ const ViewEvents = () => {
 
   const handleToggleView = () => {
     if (showMore) {
-      setVisibleEvents(6); // Show only 6 events
+      setVisibleEvents(6);
     } else {
-      setVisibleEvents(filteredEvents.length); // Show all events
+      setVisibleEvents(filteredEvents.length); 
     }
-    setShowMore(!showMore); // Toggle between 'Show More' and 'Show Less'
+    setShowMore(!showMore); 
   };
 
 

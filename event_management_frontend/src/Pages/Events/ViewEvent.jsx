@@ -9,7 +9,7 @@ const ViewEvent = () => {
   const [isEditable, setIsEditable] = useState(false);
   const { eventId } = useParams();
   const [event, setEvent] = useState(null); 
-  const [updatedEvent, setUpdatedEvent] = useState({}); // New state to store updated data
+  const [updatedEvent, setUpdatedEvent] = useState({}); 
 
   useEffect(() => {
     const fetchEventDetails = async () => {
@@ -21,7 +21,7 @@ const ViewEvent = () => {
           },
         });
         setEvent(response.data);
-        setUpdatedEvent(response.data); // Set initial values for editing
+        setUpdatedEvent(response.data); 
       } catch (error) {
         console.error('Error fetching event details:', error);
       }
@@ -43,7 +43,7 @@ const ViewEvent = () => {
         },
       });
       console.log("Event updated successfully:", response.data);
-      setEvent(response.data); // Update local state with the saved data
+      setEvent(response.data); 
       setIsEditable(false);
     } catch (error) {
       console.error("Error updating event:", error);

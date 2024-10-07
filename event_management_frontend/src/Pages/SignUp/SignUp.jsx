@@ -73,7 +73,7 @@ const SignUp = () => {
 
         } catch (error) {
             if (error.response && error.response.data) {
-                alert(error.response.data.message);  // Show the error message from the server
+                alert(error.response.data.message);  
             } else {
                 console.error('Error during signup:', error);
                 alert("Signup failed! Please try again.");
