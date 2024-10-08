@@ -4,7 +4,7 @@ import axios from "axios"
 import { useNavigate } from 'react-router-dom';
 import { assets } from '../../Assets/assets'
 
-const SignUp = () => {
+const AdminSignUp = () => {
 
     const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ const SignUp = () => {
         email: '',
         contactNo: '',
         address: '',
-        username:'',
+        username: '',
         role: 'ADMIN'
     });
 
@@ -310,4 +310,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default AdminSignUp;

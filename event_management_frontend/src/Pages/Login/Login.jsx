@@ -46,9 +46,11 @@ const Login = () => {
             
             const token = response.data.token;
             const role = response.data.role;
+            const userName = response.data.username;
             if (token) {
                 localStorage.setItem('token', token); 
                 sessionStorage.setItem('role', role); 
+                sessionStorage.setItem('username', userName);
 
                 if (role === 'ADMIN') {
                     navigate('/dashboard'); 

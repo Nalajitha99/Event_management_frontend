@@ -15,6 +15,7 @@ import UserList from "./Pages/User/UserList";
 import Dashboard from "./Pages/Dashboard/Dashboard";
 import EmailVerification from "./Pages/SignUp/EmailVerification";
 import AboutUs from "./Pages/AboutUs/AboutUs";
+import AdminSignUp from "./Pages/SignUp/AdminSignUp";
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
           <Route path="/home" exact element={<ProtectedRoute requiredRole="USER"><Home/></ProtectedRoute>}></Route>
           <Route path="/aboutUs" exact element={<ProtectedRoute requiredRole="USER"><AboutUs/></ProtectedRoute>}></Route>
           <Route path="/dashboard" exact element={<ProtectedRoute requiredRole="ADMIN"><Dashboard/></ProtectedRoute>}></Route>
+          <Route path="/addAdmin" exact element={<ProtectedRoute requiredRole="ADMIN"><AdminSignUp/></ProtectedRoute>}></Route>
 
           <Route path="/viewevents" exact element={<ProtectedRoute requiredRole="USER"><ViewEvents/></ProtectedRoute>}></Route>
           <Route path="/mybookings" exact element={<ProtectedRoute requiredRole="USER"><MyBookings/></ProtectedRoute>}></Route>

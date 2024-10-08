@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import './NavBar.css';
 import { FaBars } from "react-icons/fa";
 import { assets } from '../Assets/assets';
+import { Avatar, Button  } from '@mui/material';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const NavBar = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -14,6 +16,7 @@ const NavBar = () => {
     const handleLogout = () => {
         localStorage.removeItem('token');
         sessionStorage.removeItem('role');
+        sessionStorage.removeItem('username')
         window.location.href = '/login';
     };
 
@@ -46,9 +49,9 @@ const NavBar = () => {
                                 <li>
                                     <a href='/userList'>View Customers</a>
                                 </li>
-                                <li>
+                                {/* <li>
                                     <a href='/vieweventrequests'>View Event Requests</a>
-                                </li>
+                                </li> */}
                             </>
                         ) : userType === 'USER' ? (
                             <>
@@ -71,7 +74,18 @@ const NavBar = () => {
                             </li>
                         )}
                         <li>
-                            <button onClick={handleLogout}>Sign Out</button>
+                            <Avatar alt='' src={assets.avatar}  sx={{cursor:'pointer'}}/> {/* Avatar */}
+                        </li>
+                        <li>
+                        <Button 
+                                variant="outlined" 
+                                size='small'
+                                color="error" 
+                                sx={{  }}
+                                onClick={handleLogout} 
+                                startIcon={<LogoutIcon />}
+                            >
+                            </Button>
                         </li>
                     </ul>
                     <div className="barIcon" onClick={toggleMenu}>
