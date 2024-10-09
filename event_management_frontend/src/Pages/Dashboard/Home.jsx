@@ -8,6 +8,7 @@ import CardView from '../../Components/CardView';
 import Footer from '../../Components/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import Ratings from '../Reviews/Ratings';
 
 const Home = () => {
     const [searchArea, setSearchArea] = useState('');
@@ -65,6 +66,11 @@ const Home = () => {
                             <Search />
                             Search
                         </Button>
+                    </div>
+                </Grid>
+                <Grid item xs={12} md={2}>
+                    <div className='mt-4'>
+                        <Ratings/>
                     </div>
                 </Grid>
                 <Grid item xs={12} md={8}>

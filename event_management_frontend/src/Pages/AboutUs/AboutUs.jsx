@@ -2,6 +2,7 @@ import React from 'react'
 import NavBar from '../../Components/NavBar'
 import { Container, Grid, Typography, Box } from '@mui/material';
 import Footer from '../../Components/Footer';
+import Ratings from '../Reviews/Ratings';
 
 const AboutUs = () => {
     return (
@@ -219,6 +220,10 @@ const AboutUs = () => {
                                 and Service."
                             </Typography>
                         </Box>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                        <Ratings/>
                     </Grid>
                 </Grid>
             </Container>
