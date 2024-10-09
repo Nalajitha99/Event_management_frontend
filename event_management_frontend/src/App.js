@@ -16,6 +16,7 @@ import Dashboard from "./Pages/Dashboard/Dashboard";
 import EmailVerification from "./Pages/SignUp/EmailVerification";
 import AboutUs from "./Pages/AboutUs/AboutUs";
 import AdminSignUp from "./Pages/SignUp/AdminSignUp";
+import RequestEvent from "./Pages/Events/RequestEvent";
 
 function App() {
 
@@ -47,7 +48,7 @@ function App() {
           <Route path="/aboutUs" exact element={<ProtectedRoute requiredRole="USER"><AboutUs/></ProtectedRoute>}></Route>
           <Route path="/dashboard" exact element={<ProtectedRoute requiredRole="ADMIN"><Dashboard/></ProtectedRoute>}></Route>
           <Route path="/addAdmin" exact element={<ProtectedRoute requiredRole="ADMIN"><AdminSignUp/></ProtectedRoute>}></Route>
-
+          <Route path="/requestevent" exact element={<ProtectedRoute requiredRole="USER"><RequestEvent/></ProtectedRoute>}></Route>
           <Route path="/viewevents" exact element={<ProtectedRoute requiredRole="USER"><ViewEvents/></ProtectedRoute>}></Route>
           <Route path="/mybookings" exact element={<ProtectedRoute requiredRole="USER"><MyBookings/></ProtectedRoute>}></Route>
           <Route path="/vieweventList" exact element={<ProtectedRoute requiredRole="ADMIN"><EventList/></ProtectedRoute>}></Route>

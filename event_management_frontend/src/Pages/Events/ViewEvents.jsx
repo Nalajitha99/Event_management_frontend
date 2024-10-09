@@ -36,7 +36,7 @@ const ViewEvents = () => {
   }, []);
 
   const handleAddEvent = () => {
-    navigate("/addevent");
+    navigate("/requestevent");
   };
 
   const handleSearch = (e) => {
@@ -115,7 +115,7 @@ const ViewEvents = () => {
           </Grid>
           <Grid item xs={12} sm={4} lg={4} container justifyContent="flex-end">
             <Button variant="contained" color='secondary' startIcon={<AddIcon />} sx={{ backgroundColor: "#6a136a" }} onClick={handleAddEvent}>
-              Add Event
+              Request for Event
             </Button>
           </Grid>
         </Grid>
