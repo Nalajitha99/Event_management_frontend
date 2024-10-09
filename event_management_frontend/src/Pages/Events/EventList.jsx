@@ -26,9 +26,8 @@ const EventList = () => {
       });
   }, []);
 
-  // Handle navigation to event detail or more event information
   const handleViewMore = (eventId) => {
-    navigate(`/viewevent/${eventId}`); // Assuming you have a route for viewing individual events
+    navigate(`/viewevent/${eventId}`); 
   };
 
   return (
@@ -65,7 +64,7 @@ const EventList = () => {
                         variant='contained'
                         color='secondary'
                         sx={{ backgroundColor: "#6a136a" }}
-                        onClick={() => handleViewMore(event.eventId)} // Pass the event id to handleViewMore
+                        onClick={() => handleViewMore(event.eventId)} 
                       >
                         View more
                       </Button>

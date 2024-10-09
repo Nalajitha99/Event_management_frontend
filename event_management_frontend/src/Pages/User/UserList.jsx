@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, Grid } from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Button, Grid, Paper } from '@mui/material';
 import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ const UserList = () => {
     <NavBar userType={'admin'}/>
     <Grid container xs={12} sx={{padding: '0 20px', justifyContent: 'center'}}>
     <Grid item xs={12} sm={10} md={8} lg={10}>
-    <TableContainer style={{ marginTop: '50px', marginBottom:'20px' }}>
+    <TableContainer style={{ marginTop: '50px', marginBottom:'20px' }} component={Paper}>
       <Typography variant="h4" style={{ fontWeight:"bold", color:"#6a136a", marginBottom: '20px' }}>
         User List
       </Typography>
@@ -64,7 +64,16 @@ const UserList = () => {
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{user.lastName}</TableCell>
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{user.nic}</TableCell>
                 <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{user.contactNo}</TableCell>
-                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}><Button variant='contained' color='secondary' sx={{backgroundColor:"#6a136a"}} onClick={handleViewMore}>View more</Button></TableCell>
+                <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>
+                    <Button
+                      variant='contained'
+                      color='secondary'
+                      sx={{ backgroundColor: "#6a136a" }}
+                      onClick={() => handleViewMore(user.customerId)}
+                    >
+                      View more
+                    </Button>
+                  </TableCell>
               </TableRow>
             ))
           ) : (
