@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; 
-import { Grid, Box, Typography, Button } from '@mui/material';
+import { useNavigate, useParams } from 'react-router-dom'; 
+import { Grid, Box, Typography, Button, TextField } from '@mui/material';
 import NavBar from '../../Components/NavBar';
 import Footer from '../../Components/Footer';
 import axios from 'axios';
@@ -8,6 +8,9 @@ import axios from 'axios';
 const EventDetails = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null); 
+  const [ticketCount, setTicketCount] = useState(1);  
+  const [totalPrice, setTotalPrice] = useState(0);  
+  const navigate = useNavigate();  
 
   useEffect(() => {
     const fetchEventDetails = async () => {
@@ -19,6 +22,7 @@ const EventDetails = () => {
           },
         });
         setEvent(response.data); 
+        setTotalPrice(response.data.ticketPrice); 
       } catch (error) {
         console.error('Error fetching event details:', error);
       }
@@ -26,6 +30,12 @@ const EventDetails = () => {
 
     fetchEventDetails();
   }, [eventId]);
+
+  const handleTicketCountChange = (e) => {
+    const count = parseInt(e.target.value, 10);
+    setTicketCount(count);
+    setTotalPrice(count * event.ticketPrice); 
+  };
 
   if (!event) {
     return <div>Loading event details...</div>; 
@@ -117,6 +127,40 @@ const EventDetails = () => {
           <Grid item xs={8}>
             <Typography variant="body1">LKR {event.ticketPrice}</Typography>
           </Grid>
+          <Grid item xs={4}>
+            <Typography variant="body1" fontWeight="bold">
+              Tickets Available
+            </Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <Typography variant="body1">{event.noOfTickets} Tickets Left</Typography>
+          </Grid>
+
+          <Grid item xs={4}>
+            <Typography variant="body1" fontWeight="bold">No of Tickets:</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <TextField
+              type="number"
+              size='small'
+              variant="filled"
+              value={ticketCount}
+              onChange={handleTicketCountChange}  
+              InputLabelProps={{
+                shrink: true, 
+              }}
+              inputProps={{
+                min: 1,
+              }}
+            />
+          </Grid>
+
+          <Grid item xs={4}>
+            <Typography variant="body1" fontWeight="bold">Total Price:</Typography>
+          </Grid>
+          <Grid item xs={8}>
+            <TextField variant="filled" disabled size='small' value={`LKR ${totalPrice}`} />
+          </Grid>
         </Grid>
 
         <Box
@@ -133,8 +177,9 @@ const EventDetails = () => {
               paddingX: '20px',
               backgroundColor: '#6a136a',
             }}
+            onClick={() => navigate('/payment', { state: { eventId, totalPrice, ticketCount } })}
           >
-            Book Tickets
+            Pay Now
           </Button>
         </Box>
       </Box>

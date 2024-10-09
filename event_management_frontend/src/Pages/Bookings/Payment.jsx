@@ -1,131 +1,115 @@
-import React, { useState } from 'react';
-import { Grid, TextField, Button, Box, Typography, MenuItem, Select, InputLabel, FormControl } from '@mui/material';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import axios from 'axios';
 import NavBar from '../../Components/NavBar';
+import Footer from '../../Components/Footer';
 
 const Payment = () => {
-  const [cardDetails, setCardDetails] = useState({
-    cardNumber: '',
-    cardName: '',
-    expiryDate: '',
-    cvv: '',
-    billingAddress: '',
-    country: '',
-    paymentMethod: 'credit-card',
-  });
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { eventId, totalPrice, ticketCount } = location.state; // Retrieve state passed from EventDetails
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setCardDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
-  };
+  const [cardHolderName, setCardHolderName] = useState('');
+  const [cardNumber, setCardNumber] = useState('');
+  const [expiryDate, setExpiryDate] = useState('');
+  const [cvv, setCvv] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add payment processing logic
-    console.log(cardDetails);
+  const handlePayment = async () => {
+    const token = localStorage.getItem('token');
+    try {
+      // Call backend API to process the payment
+      const paymentResponse = await axios.post('http://localhost:8080/api/v1/payment/savePayment', {
+        eventId,
+        totalPrice,
+        ticketCount,
+        cardNumber,  // Ensure these variables are properly initialized and validated
+        expiryDate,
+        cvv,
+      }, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        withCredentials: true
+      });
+  
+      if (paymentResponse.status === 200) {
+        // After successful payment, reduce available tickets
+        await axios.put(`http://localhost:8080/api/v1/event/updateTickets/${eventId}`, null, {
+          params: { 
+            purchasedTickets: ticketCount,  // Correctly send as query parameter
+          },
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+          withCredentials: true
+        });
+  
+        navigate(`/paymentSuccess`, { state: { eventId, ticketCount } });
+      }
+    } catch (error) {
+      console.error('Payment failed:', error);
+    }
   };
+  
 
   return (
     <>
-    <NavBar/>
-    <Box
-      sx={{
-        width: '75%',
-        margin: 'auto',
-        marginTop: '50px',
-        padding: '20px',
-        boxShadow: 3,
-        borderRadius: '10px',
-        bgcolor: 'white'
-      }}
-    >
-      <Typography variant="h4" gutterBottom>
-        Payment Details
-      </Typography>
-      <form onSubmit={handleSubmit}>
-        <Grid container spacing={3}>
-          <Grid item xs={4}>
-            <FormControl fullWidth variant="filled">
-              <InputLabel id="payment-method-label">Payment Method</InputLabel>
-              <Select
-                labelId="payment-method-label"
-                value={cardDetails.paymentMethod}
-                onChange={handleChange}
-                label="Payment Method"
-                name="paymentMethod"
-              >
-                <MenuItem value="credit-card">Credit Card</MenuItem>
-                <MenuItem value="debit-card">Debit Card</MenuItem>
-              </Select>
-            </FormControl>
-          </Grid>
-
-          <Grid item xs={8}>
-            <TextField
-              fullWidth
-              label="Cardholder's Name"
-              variant="filled"
-              name="cardName"
-              value={cardDetails.cardName}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-
+      <NavBar />
+      <Box sx={{ padding: '20px', maxWidth: '600px', margin: 'auto' }}>
+        <Typography variant="h4" gutterBottom>
+          Payment Details
+        </Typography>
+        <Grid container spacing={2}>
           <Grid item xs={12}>
             <TextField
+              label="Card Holder Name"
               fullWidth
+              value={cardHolderName}
+              onChange={(e) => setCardHolderName(e.target.value)}
+              margin="normal"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <TextField
               label="Card Number"
-              variant="filled"
-              name="cardNumber"
-              type="number"
-              value={cardDetails.cardNumber}
-              onChange={handleChange}
-              required
+              fullWidth
+              value={cardNumber}
+              onChange={(e) => setCardNumber(e.target.value)}
+              margin="normal"
             />
           </Grid>
-
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <TextField
-              fullWidth
               label="Expiry Date (MM/YY)"
-              variant="filled"
-              name="expiryDate"
-              value={cardDetails.expiryDate}
-              onChange={handleChange}
-              required
-            />
-          </Grid>
-
-          <Grid item xs={6}>
-            <TextField
               fullWidth
-              label="CVV"
-              variant="filled"
-              name="cvv"
-              type="number"
-              value={cardDetails.cvv}
-              onChange={handleChange}
-              required
+              value={expiryDate}
+              onChange={(e) => setExpiryDate(e.target.value)}
+              margin="normal"
             />
           </Grid>
-
-          <Grid item xs={12} style={{ textAlign: 'center' }} sx={{display: 'flex',justifyContent: 'flex-end',marginTop: '20px',}}>
-            <Button
-              variant="contained"
-              color="secondary"
-              type="submit"
-              sx={{
-                minWidth: '150px',
-                backgroundColor: '#6a136a',
-                color: '#fff',
-              }}
-            >
-              Submit Payment
-            </Button>
+          <Grid item xs={12} sm={6}>
+            <TextField
+              label="CVV"
+              fullWidth
+              type="password"
+              value={cvv}
+              onChange={(e) => setCvv(e.target.value)}
+              margin="normal"
+            />
           </Grid>
         </Grid>
-      </form>
-    </Box>
+        <Box sx={{ display: 'flex', justifyContent: 'right', marginTop: '20px' }}>
+          <Button
+            variant="contained"
+            color="secondary"
+            onClick={handlePayment}
+          >
+            Pay LKR {totalPrice}
+          </Button>
+        </Box>
+      </Box>
+      <Footer />
     </>
   );
 };

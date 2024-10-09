@@ -18,6 +18,7 @@ import AboutUs from "./Pages/AboutUs/AboutUs";
 import AdminSignUp from "./Pages/SignUp/AdminSignUp";
 import RequestEvent from "./Pages/Events/RequestEvent";
 import ViewUser from "./Pages/User/ViewUser";
+import PaymentSuccess from "./Pages/Bookings/PaymentSuccess";
 
 function App() {
 
@@ -58,6 +59,7 @@ function App() {
           <Route path="/eventDetails/:eventId" exact element={<ProtectedRoute requiredRole="USER"><EventDetails/></ProtectedRoute>}></Route>
           <Route path="/booking" exact element={<ProtectedRoute requiredRole="USER"><Booking/></ProtectedRoute>}></Route>
           <Route path="/payment" exact element={<ProtectedRoute requiredRole="USER"><Payment/></ProtectedRoute>}></Route>
+          <Route path="/paymentSuccess" exact element={<ProtectedRoute requiredRole="USER"><PaymentSuccess/></ProtectedRoute>}></Route>
           <Route path="/userList" exact element={<ProtectedRoute requiredRole="ADMIN"><UserList/></ProtectedRoute>}></Route>
           <Route path="/viewUser/:userId" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewUser/></ProtectedRoute>}></Route>
         </Routes>
