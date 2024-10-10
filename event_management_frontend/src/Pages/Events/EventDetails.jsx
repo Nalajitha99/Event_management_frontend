@@ -12,6 +12,8 @@ const EventDetails = () => {
   const [totalPrice, setTotalPrice] = useState(0);  
   const navigate = useNavigate();  
 
+  const username = localStorage.getItem('username');
+
   useEffect(() => {
     const fetchEventDetails = async () => {
       try {

@@ -17,10 +17,12 @@ const Payment = () => {
 
   const handlePayment = async () => {
     const token = localStorage.getItem('token');
+    const username = localStorage.getItem('username');
     try {
       // Call backend API to process the payment
       const paymentResponse = await axios.post('http://localhost:8080/api/v1/payment/savePayment', {
         eventId,
+        username,
         totalPrice,
         ticketCount,
         cardNumber,  // Ensure these variables are properly initialized and validated
@@ -45,7 +47,7 @@ const Payment = () => {
           withCredentials: true
         });
   
-        navigate(`/paymentSuccess`, { state: { eventId, ticketCount } });
+        navigate(`/paymentSuccess`, { state: { eventId, ticketCount, username } });
       }
     } catch (error) {
       console.error('Payment failed:', error);

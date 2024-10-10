@@ -5,7 +5,7 @@ import NavBar from '../../Components/NavBar';
 
 const PaymentSuccess = () => {
   const location = useLocation();
-  const { eventId, ticketCount } = location.state;
+  const { eventId, ticketCount, username } = location.state;
 
   return (
     <>
@@ -15,6 +15,7 @@ const PaymentSuccess = () => {
         Payment Successful!
       </Typography>
       <Typography variant="body1">
+        Dear {username}, 
         Your payment for {ticketCount} tickets to event {eventId} has been processed.
       </Typography>
     </Box>
