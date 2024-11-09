@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import NavBar from '../../Components/NavBar';
-import { TextField, Button, MenuItem, Grid, Typography, Box } from '@mui/material';
+import { TextField, Button, MenuItem, Grid, Typography, Box, FormControl, InputLabel, Select } from '@mui/material';
 import Footer from '../../Components/Footer';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -168,15 +168,23 @@ const ViewEventRequest = () => {
                             />
                         </Grid>
 
-                        <Grid item xs={12}>
-                            <TextField
-                                fullWidth
-                                label="Status"
-                                name='status'
-                                value={eventRequest.status}
-                                onChange={handleChange}
-                            />
+                        <Grid item xs={6}>
+                            <FormControl fullWidth>
+                                <InputLabel>Status</InputLabel>
+                                <Select
+                                    label="Status"
+                                    name="status"
+                                    value={eventRequest.status}
+                                    onChange={handleChange}
+
+                                >
+                                    <MenuItem value="Accepted">Accepted</MenuItem>
+                                    <MenuItem value="Rejected">Rejected</MenuItem>
+                                    <MenuItem value="Pending">Pending</MenuItem>
+                                </Select>
+                            </FormControl>
                         </Grid>
+            
 
                         <Grid item xs={12}>
                             <Button
