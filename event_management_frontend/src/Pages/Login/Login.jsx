@@ -47,10 +47,13 @@ const Login = () => {
             const token = response.data.token;
             const role = response.data.role;
             const userName = response.data.username;
+            const email = response.data.email;
             if (token) {
                 localStorage.setItem('token', token); 
                 sessionStorage.setItem('role', role); 
                 localStorage.setItem('username', userName);
+                localStorage.setItem('email', email);
+
 
                 if (role === 'ADMIN') {
                     navigate('/dashboard'); 
@@ -62,6 +65,8 @@ const Login = () => {
                 localStorage.removeItem('token');
                 sessionStorage.removeItem('role');
                 localStorage.removeItem('username');
+                localStorage.removeItem('email');
+
                 alert('Session Expired!... Please Login again. ')
                 navigate('/login');
                

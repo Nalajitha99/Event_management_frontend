@@ -19,6 +19,7 @@ import AdminSignUp from "./Pages/SignUp/AdminSignUp";
 import RequestEvent from "./Pages/Events/RequestEvent";
 import ViewUser from "./Pages/User/ViewUser";
 import PaymentSuccess from "./Pages/Bookings/PaymentSuccess";
+import ViewEventRequest from "./Pages/Events/ViewEventRequest";
 
 function App() {
 
@@ -56,6 +57,7 @@ function App() {
           <Route path="/vieweventList" exact element={<ProtectedRoute requiredRole="ADMIN"><EventList/></ProtectedRoute>}></Route>
           <Route path="/addevent" exact element={<ProtectedRoute requiredRole="ADMIN"><AddEvent/></ProtectedRoute>}></Route>
           <Route path="/viewevent/:eventId" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewEvent/></ProtectedRoute>}></Route>
+          <Route path="/vieweventRequest/:organizerId" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewEventRequest/></ProtectedRoute>}></Route>
           <Route path="/eventDetails/:eventId" exact element={<ProtectedRoute requiredRole="USER"><EventDetails/></ProtectedRoute>}></Route>
           <Route path="/booking" exact element={<ProtectedRoute requiredRole="USER"><Booking/></ProtectedRoute>}></Route>
           <Route path="/payment" exact element={<ProtectedRoute requiredRole="USER"><Payment/></ProtectedRoute>}></Route>

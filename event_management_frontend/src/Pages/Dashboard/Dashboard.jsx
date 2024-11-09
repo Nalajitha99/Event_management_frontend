@@ -46,11 +46,6 @@ const Dashboard = () => {
     const adminUsers = allUsers.filter(user => user.role === 'ADMIN');
 
 
-
-    const handleViewMore = (organizerId) => {
-        navigate(`/vieweventRequest/${organizerId}`);
-    };
-
     return (
         <>
             <NavBar />
@@ -96,7 +91,7 @@ const Dashboard = () => {
                                                         variant='contained'
                                                         color='secondary'
                                                         sx={{ backgroundColor: "#6a136a" }}
-                                                        onClick={() => handleViewMore(eventOrganizer.organizerId)}
+                                                        onClick={() => navigate(`/vieweventRequest/${eventOrganizer.organizerId}`)}
                                                     >
                                                         View more
                                                     </Button>
@@ -137,7 +132,7 @@ const Dashboard = () => {
                                                         variant='contained'
                                                         color='secondary'
                                                         sx={{ backgroundColor: "#6a136a" }}
-                                                        onClick={() => navigate(`/viewAdmin/${admin.customerId}`)}
+                                                        onClick={() => navigate(`/viewUser/${admin.customerId}`)}
                                                     >
                                                         See More
                                                     </Button>
