@@ -12,8 +12,8 @@ const Login = () => {
         top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "75%",
-        height: "70%",
+        width: { xs: "90%", sm: "80%", md: "75%", lg: "60%" },
+        height: "auto",
         bgcolor: "rgba(0, 0, 0, 0.5)",
         border: "none",
         boxShadow: 24,
@@ -114,7 +114,7 @@ const Login = () => {
 
             <Box sx={boxstyle}>
                 <Grid container>
-                    <Grid item xs={12} sm={12} lg={6}>
+                    <Grid item xs={12} sm={12} lg={6} sx={{display: { xs: "none", lg: "block" },}}>
                         <Box
                             style={{
                                 position: 'relative',
