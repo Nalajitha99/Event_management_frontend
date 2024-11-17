@@ -62,6 +62,24 @@ const ViewEvent = () => {
     return <div>Loading event details...</div>;
   }
 
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      try {
+        const token = localStorage.getItem('token');
+        await axios.delete(`http://localhost:8080/api/v1/event/deleteEvent/${eventId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        alert("Event deleted successfully!");
+        window.location.href = "/vieweventList"; 
+      } catch (error) {
+        console.error("Error deleting event:", error);
+        alert("Failed to delete the event. Please try again.");
+      }
+    }
+  };
+
   return (
     <>
       <NavBar  />
@@ -227,6 +245,15 @@ const ViewEvent = () => {
                 onClick={handleEdit}
               >
                 {isEditable ? "Cancel" : "Edit"}
+              </Button>
+
+              <Button
+                variant="contained"
+                color="error"
+                sx={{ marginLeft: '10px', minWidth: "150px" }}
+                onClick={handleDelete}
+              >
+                Delete
               </Button>
 
               {isEditable && (

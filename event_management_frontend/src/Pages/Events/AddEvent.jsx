@@ -259,6 +259,9 @@ const AddEvent = () => {
                 name="date"
                 value={formData.date}
                 onChange={handleInputChange}
+                InputProps={{
+                  inputProps: { min: new Date().toISOString().split('T')[0] }
+                }}
               />
             </Grid>
 
