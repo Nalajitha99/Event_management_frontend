@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Box, Button, Grid, TextField, Typography } from '@mui/material';
 import axios from 'axios';
@@ -8,52 +8,84 @@ import Footer from '../../Components/Footer';
 const Payment = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { eventId, totalPrice, ticketCount } = location.state; // Retrieve state passed from EventDetails
+  const { eventId, totalPrice, ticketCount } = location.state;
 
   const [cardHolderName, setCardHolderName] = useState('');
   const [cardNumber, setCardNumber] = useState('');
   const [expiryDate, setExpiryDate] = useState('');
   const [cvv, setCvv] = useState('');
 
+  const [errors, setErrors] = useState({});
+
+  const validateFields = () => {
+    const newErrors = {};
+
+    if (!cardHolderName.trim()) {
+      newErrors.cardHolderName = 'Card holder name is required.';
+    }
+
+    if (!cardNumber.match(/^\d{16}$/)) {
+      newErrors.cardNumber = 'Card number must be 16 digits.';
+    }
+
+    if (!expiryDate.match(/^(0[1-9]|1[0-2])\/\d{2}$/)) {
+      newErrors.expiryDate = 'Expiry date must be in MM/YY format.';
+    }
+
+    if (!cvv.match(/^\d{3}$/)) {
+      newErrors.cvv = 'CVV must be a 3-digit number.';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handlePayment = async () => {
+    if (!validateFields()) {
+      return;
+    }
+
     const token = localStorage.getItem('token');
     const username = localStorage.getItem('username');
     try {
-      // Call backend API to process the payment
-      const paymentResponse = await axios.post('http://localhost:8080/api/v1/payment/savePayment', {
-        eventId,
-        username,
-        totalPrice,
-        ticketCount,
-        cardNumber,  // Ensure these variables are properly initialized and validated
-        expiryDate,
-        cvv,
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`
+      const paymentResponse = await axios.post(
+        'http://localhost:8080/api/v1/payment/savePayment',
+        {
+          eventId,
+          username,
+          totalPrice,
+          ticketCount,
+          cardNumber,
+          expiryDate,
+          cvv,
         },
-        withCredentials: true
-      });
-  
-      if (paymentResponse.status === 200) {
-        // After successful payment, reduce available tickets
-        await axios.put(`http://localhost:8080/api/v1/event/updateTickets/${eventId}`, null, {
-          params: { 
-            purchasedTickets: ticketCount,  // Correctly send as query parameter
-          },
+        {
           headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
           },
-          withCredentials: true
-        });
-  
+          withCredentials: true,
+        }
+      );
+
+      if (paymentResponse.status === 200) {
+        await axios.put(
+          `http://localhost:8080/api/v1/event/updateTickets/${eventId}`,
+          null,
+          {
+            params: { purchasedTickets: ticketCount },
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            withCredentials: true,
+          }
+        );
+
         navigate(`/paymentSuccess`, { state: { eventId, ticketCount, username } });
       }
     } catch (error) {
       console.error('Payment failed:', error);
     }
   };
-  
 
   return (
     <>
@@ -70,6 +102,8 @@ const Payment = () => {
               value={cardHolderName}
               onChange={(e) => setCardHolderName(e.target.value)}
               margin="normal"
+              error={!!errors.cardHolderName}
+              helperText={errors.cardHolderName}
             />
           </Grid>
           <Grid item xs={12}>
@@ -79,6 +113,8 @@ const Payment = () => {
               value={cardNumber}
               onChange={(e) => setCardNumber(e.target.value)}
               margin="normal"
+              error={!!errors.cardNumber}
+              helperText={errors.cardNumber}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -88,6 +124,8 @@ const Payment = () => {
               value={expiryDate}
               onChange={(e) => setExpiryDate(e.target.value)}
               margin="normal"
+              error={!!errors.expiryDate}
+              helperText={errors.expiryDate}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
@@ -98,6 +136,8 @@ const Payment = () => {
               value={cvv}
               onChange={(e) => setCvv(e.target.value)}
               margin="normal"
+              error={!!errors.cvv}
+              helperText={errors.cvv}
             />
           </Grid>
         </Grid>
