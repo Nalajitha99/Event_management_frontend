@@ -49,6 +49,7 @@ const NavBar = () => {
                                 <li>
                                     <a href='/userList'>View Customers</a>
                                 </li>
+                                
                                 {/* <li>
                                     <a href='/vieweventrequests'>View Event Requests</a>
                                 </li> */}
@@ -73,9 +74,7 @@ const NavBar = () => {
                                 <span>Loading...</span>
                             </li>
                         )}
-                        <li>
-                            <Avatar alt='' src={assets.avatar}  sx={{cursor:'pointer'}}/> {/* Avatar */}
-                        </li>
+                        
                         <li>
                         <Button 
                                 variant="outlined" 

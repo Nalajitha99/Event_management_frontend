@@ -297,7 +297,7 @@ const AdminSignUp = () => {
                                             color='secondary'
                                             type='submit'
                                         >
-                                            SignUp
+                                            Save
                                         </Button>
                                     </Grid>
                                 </Grid>

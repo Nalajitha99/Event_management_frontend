@@ -20,6 +20,7 @@ import RequestEvent from "./Pages/Events/RequestEvent";
 import ViewUser from "./Pages/User/ViewUser";
 import PaymentSuccess from "./Pages/Bookings/PaymentSuccess";
 import ViewEventRequest from "./Pages/Events/ViewEventRequest";
+import ViewRatings from "./Pages/Reviews/ViewRatings";
 
 function App() {
 
@@ -63,6 +64,7 @@ function App() {
           <Route path="/payment" exact element={<ProtectedRoute requiredRole="USER"><Payment/></ProtectedRoute>}></Route>
           <Route path="/paymentSuccess" exact element={<ProtectedRoute requiredRole="USER"><PaymentSuccess/></ProtectedRoute>}></Route>
           <Route path="/userList" exact element={<ProtectedRoute requiredRole="ADMIN"><UserList/></ProtectedRoute>}></Route>
+          <Route path="/reviewList" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewRatings/></ProtectedRoute>}></Route>
           <Route path="/viewUser/:userId" exact element={<ProtectedRoute requiredRole="ADMIN"><ViewUser/></ProtectedRoute>}></Route>
         </Routes>
       </BrowserRouter>

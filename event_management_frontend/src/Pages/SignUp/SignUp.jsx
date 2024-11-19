@@ -66,10 +66,6 @@ const SignUp = () => {
             newErrors.password = 'Password is required';
         }
 
-        if (formData.password !== formData.confirmedPassword) {
-            newErrors.confirmedPassword = 'Passwords do not match';
-        }
-
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
     };
@@ -93,6 +89,8 @@ const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (validate()) {
+            console.log('Sending request with formData:', formData);
+
         try {
             const response = await axios.post('http://localhost:8080/api/v1/user/saveUser', formData);
             console.log(response.data); 

@@ -3,6 +3,9 @@ import { Grid, Paper, Typography, Table, TableBody, TableCell, TableContainer, T
 import NavBar from '../../Components/NavBar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import ViewRatings from '../Reviews/ViewRatings';
+import AddIcon from '@mui/icons-material/Add';
+import BarChart from '../../Components/BarChart';
 
 const ChartPlaceholder = ({ text }) => (
     <Paper elevation={3} style={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
@@ -45,6 +48,10 @@ const Dashboard = () => {
 
     const adminUsers = allUsers.filter(user => user.role === 'ADMIN');
 
+    const handleAdmin  = () => {
+        navigate('/addAdmin');
+    }
+
 
     return (
         <>
@@ -52,21 +59,9 @@ const Dashboard = () => {
             <div style={{ padding: '20px' }}>
                 <Grid container spacing={3}>
 
-                    {/* Total Sold Tickets - Chart */}
-                    <Grid item xs={12} sm={6}>
-                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Registered users of this month</Typography>
-                        <ChartPlaceholder text="Line Chart" />
-                    </Grid>
-
-                    {/* Weekly Users - Donut Chart */}
-                    <Grid item xs={12} sm={6}>
-                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Past Events</Typography>
-                        <ChartPlaceholder text="Donut Chart" />
-                    </Grid>
-
                     {/* Event Registration User List */}
-                    <Grid item xs={12} sm={8}>
-                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Event Request List</Typography>
+                    <Grid item xs={12} sm={6}>
+                        <Typography variant="h5" fullwidth style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Event Request List</Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
@@ -74,12 +69,11 @@ const Dashboard = () => {
                                         <TableCell>Event Organizing company Name</TableCell>
                                         <TableCell>Event Type</TableCell>
                                         <TableCell>Status</TableCell>
-                                        <TableCell></TableCell>
+                                        <TableCell>More Info</TableCell>
 
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
-                                    {/* Placeholder Rows */}
                                     {eventRequests.length > 0 ? (
                                         eventRequests.map((eventOrganizer, index) => (
                                             <TableRow key={index}>
@@ -105,21 +99,23 @@ const Dashboard = () => {
                                             </TableCell>
                                         </TableRow>
                                     )}
-                                    {/* Add more rows as needed */}
                                 </TableBody>
                             </Table>
                         </TableContainer>
                     </Grid>
 
                     {/* Admin List */}
-                    <Grid item xs={12} sm={4}>
-                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Admin List</Typography>
+                    <Grid item xs={12} sm={5}>
+                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Admin List 
+                        </Typography>
                         <TableContainer component={Paper}>
                             <Table>
                                 <TableHead>
                                     <TableRow>
-                                        <TableCell>Name</TableCell>
-                                        <TableCell></TableCell>
+                                        <TableCell>First Name</TableCell>
+                                        <TableCell>Last Name</TableCell>
+                                        <TableCell>Contact No</TableCell>
+                                        <TableCell>More Info</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
@@ -127,6 +123,8 @@ const Dashboard = () => {
                                         adminUsers.map((admin, index) => (
                                             <TableRow key={index}>
                                                 <TableCell>{admin.firstName}</TableCell>
+                                                <TableCell>{admin.lastName}</TableCell>
+                                                <TableCell>{admin.contactNo}</TableCell>
                                                 <TableCell>
                                                     <Button
                                                         variant='contained'
@@ -149,6 +147,26 @@ const Dashboard = () => {
                         </TableContainer>
                     </Grid>
 
+                    <Grid item xs={12} sm={1}>
+                        <Button variant="contained" color='secondary' startIcon={<AddIcon />} sx={{ backgroundColor: "#6a136a" }} onClick={handleAdmin}>
+                            Admin
+                        </Button>
+                    </Grid>
+
+                    {/* Total Sold Tickets - Chart */}
+                    <Grid item xs={12} sm={8}>
+                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>Total Tickets Sold</Typography>
+                        <BarChart/>
+                    </Grid>
+
+                    {/* Ratings  */}
+                    <Grid item xs={12} sm={4}>
+                        <Typography variant="h5" style={{ fontWeight: "bold", color: "#6a136a", marginBottom: '20px' }}>
+                            User Ratings
+                        </Typography>
+                        <ViewRatings/>
+                    </Grid>
+                    
                 </Grid>
             </div>
         </>

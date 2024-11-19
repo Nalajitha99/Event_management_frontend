@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Dialog, DialogActions, DialogContent, DialogTitle, Button, TextField, Rating, Box } from '@mui/material';
 import { Star } from '@mui/icons-material';
+import axios from 'axios';
 
 const Ratings = () => {
     const [open, setOpen] = useState(false);
@@ -10,15 +11,50 @@ const Ratings = () => {
     const handleClickOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const handleSubmit = () => {
-        console.log('Review:', review);
-        console.log('Rating:', rating);
+    const handleSubmit = async () => {
+        const username = localStorage.getItem('username'); 
+        const token = localStorage.getItem('token'); 
+
+        if (!username || !token) {
+            alert("User not authenticated. Please log in.");
+            handleClose();
+            return;
+        }
+
+        const ratingData = {
+            comment: review,
+            stars: rating.toString(),
+            username: username,
+        };
+
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/rating/saveRating', ratingData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+
+            if (response.status === 200) {
+                alert('Rating submitted successfully!');
+            }
+        } catch (error) {
+            console.error('Error submitting rating:', error);
+            alert('Failed to submit rating. Please try again.');
+        }
+
+        setReview('');
+        setRating(0);
         handleClose();
     };
 
     return (
         <div>
-            <Button variant="contained" color='secondary' onClick={handleClickOpen} sx={{ backgroundColor: "#6a136a", color: "#fff" }}>
+            <Button
+                variant="contained"
+                color="secondary"
+                onClick={handleClickOpen}
+                sx={{ backgroundColor: "#6a136a", color: "#fff" }}
+            >
                 <Star />
                 Rate Us
             </Button>
@@ -54,7 +90,7 @@ const Ratings = () => {
                     <Button
                         onClick={handleSubmit}
                         variant="contained"
-                        color='secondary'
+                        color="secondary"
                         sx={{ backgroundColor: "#6a136a", color: "#fff" }}
                     >
                         Submit
