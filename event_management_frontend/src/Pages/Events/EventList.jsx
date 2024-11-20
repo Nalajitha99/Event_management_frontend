@@ -42,6 +42,7 @@ const EventList = () => {
           <Table>
             <TableHead>
               <TableRow>
+                <TableCell align="center" sx={{ border: `2px solid ${borderColor}`, fontWeight:"bold" }}>Event Id</TableCell>
                 <TableCell align="center" sx={{ border: `2px solid ${borderColor}`, fontWeight:"bold" }}>Event</TableCell>
                 <TableCell align="center" sx={{ border: `2px solid ${borderColor}`, fontWeight:"bold" }}>Category</TableCell>
                 <TableCell align="center" sx={{ border: `2px solid ${borderColor}`, fontWeight:"bold" }}>Date</TableCell>
@@ -54,6 +55,7 @@ const EventList = () => {
               {events.length > 0 ? (
                 events.map((event, index) => (
                   <TableRow key={index}>
+                    <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{event.eventId}</TableCell>
                     <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{event.title}</TableCell>
                     <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{event.category}</TableCell>
                     <TableCell align="center" sx={{ border: `1px solid ${borderColor}` }}>{new Date(event.date).toLocaleDateString()}</TableCell>
